@@ -1,0 +1,55 @@
+
+repeat 5:
+	say "hi"
+;
+
+df main (List) -> num?
+main = args:
+	do_smth,
+
+	df arg1 = type args[1]..
+		..String: err "Expected a number as first argument";
+		..Number: args[1];
+		..Err{ tp, msg }: tp..
+				..ErrTp--IndexOutOfBounds: 0;
+				..other: Err tp msg;
+			;
+
+	type arg1 .. Number:
+		mut x = 50,
+		x = sum x 20,
+		say x,
+	;
+	arg1 if type $ .. Err
+;
+
+do_smth = ():
+	say "hello"
+;
+
+
+// With '{ }' expr-blocks
+
+repeat 5
+	say "hi"
+
+main List -> num?
+main = args {
+	do_smth,
+
+	df arg1 = type args[1]..
+		..String { err "Expected a number as first argument" }
+		..Number { args[1] }
+		..Err(tp, msg) { tp..
+				..ErrTp--IndexOutOfBounds { 0 }
+				..other: { Err tp msg }
+		}
+
+	type arg1 .. Number {
+		mut x = 50
+		x = sum x 20
+		say x }
+
+	{ arg1 } if { type $ } .. { Err }
+}
+
