@@ -10,7 +10,7 @@ My personal configuration for neovim, zsh etc
     - default config :   /etc/xdg/picom.conf
     - user config    :   .config/picom
 2. Cmd line programs
-  - [groot](https://github.com/Canop/broot)        :   all this in one: `tree, ranger, cd,mv,cp..`
+  - [broot](https://github.com/Canop/broot)        :   all this in one: `tree, ranger, cd,mv,cp..`
 
 
 ## Universal scripts && commands
