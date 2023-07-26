@@ -5,6 +5,10 @@
 # `most ytop tealdeer`
 
 
+# Make exa show icons by default
+alias exa 'exa --icons'
+
+
 ### Terminal ###
 function clear_screen
 	clear && echo
