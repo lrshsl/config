@@ -16,6 +16,8 @@ My personal configuration for neovim, zsh etc
 - grep              : rg (ripgrep)
 - find              : fd
 - cat               : bat
+- sed               : sd
+- ps                : procs
 - top => htop       : ytop
 - man => tldr       : tealdeer
 
