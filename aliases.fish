@@ -32,11 +32,12 @@ abbr -p=anywhere --set-cursor=' ' hm '~/ '		# Home: But adds two spaces after cu
 ### Remind (and force) me to use the good (and rusty) tools ###
 abbr grep		rg
 abbr find		fd
-abbr less		'most or more or less'
-abbr htop		'ytop or htop'
+abbr less		'most; or more; or less'
+abbr sed		'sd; or sed'
+abbr htop		'ytop; or htop'
 abbr du			dust
 abbr ncdu		dust
-abbr man 		'tldr or man'
+abbr man 		'tldr; or man'
 alias z  		zoxide
 abbr cd 		z
 
