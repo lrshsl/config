@@ -44,3 +44,51 @@ abbr cd 		z
 ### ls or tree ###
 
 
+function lstree
+	if test (count $argv) = 0
+		exa -TL 1 2> /dev/null
+		or tree -CL 1 2> /dev/null
+		or ls -l
+	else
+		exa -TL $argv 2> /dev/null
+		or exa -TL 1 $argv
+
+		or tree -CL $argv 2> /dev/null
+		or tree -CL 1 $argv
+
+		or ls -l $argv
+	end
+end
+
+
+#-- List version --#
+
+abbr l			'exa'
+abbr ls			'exa -l'
+abbr la			'exa -la'
+abbr lst		lstree
+abbr t			lstree
+
+
+#-- Tree version --#
+
+abbr l			lstree
+abbr ls			lstree 2
+abbr la 		lstree 1 -la
+abbr lst		lstree 3
+abbr t			broot
+
+
+#-- Common --#
+
+abbr l1			lstree 1
+abbr l2			lstree 2
+abbr l3			lstree 3
+abbr l4			lstree 4
+abbr l5			lstree 5
+
+
+
+
+
+
