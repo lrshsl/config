@@ -7,10 +7,16 @@ My personal configuration for neovim, zsh etc
 
 1. Names/commands/locations
   - picom
-    - default config :   /etc/xdg/picom.conf
-    - user config    :   .config/picom
-2. Cmd line programs
-  - [broot](https://github.com/Canop/broot)        :   all this in one: `tree, ranger, cd,mv,cp..`
+    - default config  :   /etc/xdg/picom.conf
+    - user config     :   .config/picom
+2. Linux | Unix (shell) commands and their Rusty modern equivalents:
+  - ls                : exa
+  - grep              : rg (ripgrep)
+  - find              : fd
+  - cat               : bat
+3. Other command line utils
+  - tokei : Information about code, in Rust
+  - [broot](https://github.com/Canop/broot) : Nice [Ranger]() alternative in Rust
 
 
 ## Universal scripts && commands
