@@ -28,7 +28,7 @@ abbr rem		'sudo pacman -Rns'
 abbr fn			'funced -e nvim -s'
 
 function last_history_item
-    echo $history[1]
+    echo $history[1]>
 end
 abbr !! --position anywhere --function last_history_item
 abbr -p=anywhere --set-cursor=' ' hm '~/ '		# Home: But adds two spaces after cursor
