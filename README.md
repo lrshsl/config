@@ -6,11 +6,9 @@ My personal configuration for my terminal live: vimrc, fish abbreviations and ju
 ## To remember for new systems
 
 #### Names/commands/locations
-  - picom
-    - default config  :   /etc/xdg/picom.conf
-    - user config     :   .config/picom
+  - picom: `cp /etc/xdg/picom.conf ~/.config/picom`
 
-#### Linux | Unix (shell) commands and their Rusty modern equivalents (which I often find better suited for modern terminal usage):
+#### Linux | Unix (shell) commands and their Rusty modern equivalents:
 - cd                : zoxide
 - ls                : exa
 - grep              : rg (ripgrep)
