@@ -1,12 +1,10 @@
+
 # Dependencies:
 # `exa ripgrep fd dust zoxide`
 #
 # Optional:
 # `most ytop tealdeer`
 
-
-# Make exa show icons by default
-alias exa 'exa --icons'
 
 
 ### Terminal ###
@@ -19,19 +17,35 @@ abbr q			exit
 abbr rbt		reboot
 abbr po			poweroff
 
+abbr n			nvim .
+abbr nv			neovide .
+
+abbr zl			'zellij -l'
+abbr za			'zellij a'
+abbr zn			'zellij -s'
+
 ### Pacman ###
 abbr get		'sudo pacman -S'
-abbr upd		'sudo pacman -Syyu --noconfirm'
+abbr up			'sudo pacman -Syyu --noconfirm'
 abbr rem		'sudo pacman -Rns'
+
+### Git ###
+abbr g			            git
+abbr go 		            git checkout
+abbr ga                     git add
+abbr --set-cursor   gm      'git commit -m "%"'
+abbr gp			            'tok_gt && git push'
+abbr gs			            git status
 
 ### Fish ###
 abbr fn			'funced -e nvim -s'
 
 function last_history_item
-    echo $history[1]>
+    echo $history[1]
 end
 abbr !! --position anywhere --function last_history_item
-abbr -p=anywhere --set-cursor=' ' hm '~/ '		# Home: But adds two spaces after cursor
+abbr -p=anywhere --set-cursor hm '~/%'
+
 
 ### Remind (and force) me to use the good (and rusty) tools ###
 abbr grep		rg
@@ -41,13 +55,16 @@ abbr sed		'sd; or sed'
 abbr htop		'ytop; or htop'
 abbr du			dust
 abbr ncdu		dust
-abbr man 		'tldr; or man'
-alias z  		zoxide
+#abbr man 		tldr
+# alias z  		zoxide
 abbr cd 		z
+
 
 
 ### ls or tree ###
 
+# Make exa show icons by default
+alias exa 'exa --icons'
 
 function lstree
 	if test (count $argv) = 0
@@ -95,5 +112,29 @@ abbr l5			lstree 5
 
 
 
+
+#-- Functions --#
+
+
+# Decimal to binary
+function d2b
+    if test (count $argv) -ne 1
+        echo "Usage: d2b <number>"
+    end
+    if test $argv[1] -gt 255
+        echo "Can only convert one byte"
+    end
+
+    set -l n $argv[1]
+    set -l res
+    for i in (seq 7 -1 0)
+        if test 0 -eq (math bitand $n, 2^$i)
+            set -a res 0
+        else
+            set -a res 1
+        end
+    end
+    echo $res
+end
 
 
