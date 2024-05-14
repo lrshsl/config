@@ -8,6 +8,21 @@ My personal configuration for my terminal live: vimrc, fish abbreviations and ju
 #### Names/commands/locations
   - picom: `cp /etc/xdg/picom.conf ~/.config/picom`
 
+.gitconfig with pretty decorate formats
+```
+[user]
+	email = hoeslilars@gmail.com
+	name = lrshsl
+[init]
+	defaultBranch = main
+[alias]
+lg1 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+
+lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+
+lg = !"git lg1"
+```
+
 #### Linux | Unix (shell) commands and their Rusty modern equivalents:
 - cd                : zoxide
 - ls                : exa
