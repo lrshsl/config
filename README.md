@@ -72,3 +72,83 @@ xrandr --output HDMI-1 --off
 # enable again
 xrandr --output HDMI-1 --auto
 ```
+
+## Trouble shooting
+
+#### Bluetooth
+
+Error: `No default controler available`
+
+How I once succeeded:
+
+##### Maybe it's just blocked?
+
+```sh
+rfkill list
+```
+The last time, the controler didn't even show up, only the wifi interface. If it does, just unblock it:
+```sh
+sudo rfkill unblock all
+```
+
+##### Reinstall bluez packages (lib may not be necessary)
+```sh
+sudo pacman -S bluez bluez-utils bluez-lib
+```
+
+##### Kernel module loaded?
+```sh
+# Kernel module
+## Everything bluetooth related
+lsmod | head -n 2 && lsmod | rg blue
+
+## Btusb might also be needed
+lsmod | rg btusb
+```
+
+```sh
+# (Re)load btusb module
+sudo rmmod btusb
+sleep 5
+sudo modprobe btusb
+```
+
+##### Service loaded?
+```sh
+# Bluetooth service
+systemctl status bluetooth
+```
+
+```sh
+# Start service
+sudo systemctl enable --now bluetooth
+```
+
+
+#### Check logs
+```sh
+sudo dmesg | rg -i bluetooth
+```
+This might show that a certain firmware could not be loaded --> Install this firmware.
+
+
+#### Did it work?
+
+```sh
+bluetoothctl power on
+```
+
+#### Else
+
+Uninstall blueman or other bluetooth managers and reboot
+```sh
+sudo pacman -Rns blueman
+reboot
+```
+
+Or just reboot
+```sh
+reboot
+```
+
+After playing with those commands and rebooting, I installed blueman again and it worked.
