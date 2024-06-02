@@ -1,0 +1,4 @@
+git config --global init.defaultBranch main
+
+git config --global user.name "lrshsl"
+git config --global user.email "hoeslilars@gmail.com"

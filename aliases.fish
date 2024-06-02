@@ -60,9 +60,7 @@ abbr -p=anywhere --set-cursor mm '~/%'
 #abbr du			dust
 #abbr ncdu		dust
 #abbr man 		tldr
-# alias z  		zoxide
-abbr cd 		z
-
+abbr cd 		z # zoxide
 
 
 ### ls or tree ###
