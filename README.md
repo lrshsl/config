@@ -42,7 +42,7 @@ lg = !"git lg1"
 
 ## Universal scripts && commands
 
-- Set keyboard layout
+## Keyboard layout
 ```sh
 # X11
 setxkbmap "us(colemak),ch" -option "grp:shifts_toggle"
@@ -55,9 +55,10 @@ grep -E "caps:" /usr/share/X11/xkb/rules/base.lst
 # There are great arch wiki articles for that
 ```
 
-- Dualmonitor (X11)
+## Multi monitor setup (X11)
     - (a|x)randr
-    - autorandr for automation
+    - autorandr for automation --> See [scripts/](scripts/)
+
 ```sh
 # duplicate monitor
 xrandr --output HDMI-1 --same-as eDP-1
@@ -73,15 +74,28 @@ xrandr --output HDMI-1 --off
 xrandr --output HDMI-1 --auto
 ```
 
-## Trouble shooting
+## Urxvt config
 
-#### Bluetooth
+Start daemon in background
+```sh
+urxvtd -p -f -o
+```
+
+Reload config
+```sh
+xrdb -merge ~/.Xresources
+```
+
+> When an error occurs about fonts (`char width can't be calculated` or similar), just first try to increase the font size.
+> Don't ask.
+
+## Bluetooth
 
 Error: `No default controler available`
 
 How I once succeeded:
 
-##### Maybe it's just blocked?
+#### Maybe it's just blocked?
 
 ```sh
 rfkill list
@@ -91,12 +105,12 @@ The last time, the controler didn't even show up, only the wifi interface. If it
 sudo rfkill unblock all
 ```
 
-##### Reinstall bluez packages (lib may not be necessary)
+#### Reinstall bluez packages (lib may not be necessary)
 ```sh
 sudo pacman -S bluez bluez-utils bluez-lib
 ```
 
-##### Kernel module loaded?
+#### Kernel module loaded?
 ```sh
 # Kernel module
 ## Everything bluetooth related
@@ -113,7 +127,7 @@ sleep 5
 sudo modprobe btusb
 ```
 
-##### Service loaded?
+#### Service loaded?
 ```sh
 # Bluetooth service
 systemctl status bluetooth
@@ -152,3 +166,5 @@ reboot
 ```
 
 After playing with those commands and rebooting, I installed blueman again and it worked.
+
+
