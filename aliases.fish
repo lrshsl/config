@@ -13,36 +13,36 @@ function clear_screen
 end
 
 # Terminal itself
-abbr c			clear_screen
-abbr q			exit
-abbr rbt		reboot
-abbr po			poweroff
+abbr c         clear_screen
+abbr q         exit
+abbr rbt       reboot
+abbr po        poweroff
 
-abbr n			nvim .
-abbr nv			neovide .
+abbr n         nvim .
+abbr nv        neovide .
 
-abbr zl			'zellij -l'
-abbr za			'zellij a'
-abbr zn			'zellij -s'
+abbr zl        'zellij -l'
+abbr za        'zellij a'
+abbr zn        'zellij -s'
 
-abbr mr         make run
-abbr cr         cargo run --
+abbr mr        make run
+abbr cr        cargo run --
 
 ### Pacman ###
-abbr get		'sudo pacman -S'
-abbr up			'sudo pacman -Syyu --noconfirm'
-abbr rem		'sudo pacman -Rns'
+abbr get       'sudo pacman -S'
+abbr up        'sudo pacman -Syyu --noconfirm'
+abbr rem       'sudo pacman -Rns'
 
 ### Git ###
-abbr g			            git
-abbr go 		            git checkout
-abbr ga                     git add
+abbr g         git
+abbr go        git checkout
+abbr ga        git add
 abbr --set-cursor   gm      'git commit -m "%"'
-abbr gp			            'tok_gt && git push'
-abbr gs			            git status
+abbr gp        'tok_gt && git push'
+abbr gs        git status
 
 ### Fish ###
-abbr fn			'funced -e nvim -s'
+abbr fn        'funced -e nvim -s'
 
 function last_history_item
     echo $history[1]
@@ -52,15 +52,18 @@ abbr -p=anywhere --set-cursor mm '~/%'
 
 
 ### Remind (and force) me to use the good (and rusty) tools ###
-#abbr grep		rg
-#abbr find		fd
-#abbr less		most
-#abbr sed		sd
-#abbr htop		ytop
-#abbr du			dust
-#abbr ncdu		dust
-#abbr man 		tldr
-abbr cd 		z # zoxide
+#abbr grep     rg
+#abbr find     fd
+#abbr less     most
+#abbr sed      sd
+#abbr htop     ytop
+#abbr du       dust
+#abbr ncdu     dust
+#abbr man      tldr
+#abbr cd        z # zoxide (source zoxide config)
+
+# - broot
+# - foot (terminal emulator)
 
 
 ### ls or tree ###
@@ -87,29 +90,29 @@ end
 
 #-- List version --#
 
-abbr l			'exa'
-abbr ls			'exa -l'
-abbr la			'exa -la'
-abbr lst		lstree
-abbr t			lstree
+abbr l         'exa'
+abbr ls        'exa -l'
+abbr la        'exa -la'
+abbr lst       lstree
+abbr t         lstree
 
 
 #-- Tree version --#
 
-abbr l			lstree
-abbr ls			lstree 2
-abbr la 		lstree 1 -la
-abbr lst		lstree 3
-abbr t			broot
+abbr l         lstree
+abbr ls        lstree 2
+abbr la        lstree 1 -la
+abbr lst       lstree 3
+abbr t         broot
 
 
 #-- Common --#
 
-abbr l1			lstree 1
-abbr l2			lstree 2
-abbr l3			lstree 3
-abbr l4			lstree 4
-abbr l5			lstree 5
+abbr l1        lstree 1
+abbr l2        lstree 2
+abbr l3        lstree 3
+abbr l4        lstree 4
+abbr l5        lstree 5
 
 
 
@@ -120,23 +123,23 @@ abbr l5			lstree 5
 
 # Decimal to binary
 function d2b
-    if test (count $argv) -ne 1
-        echo "Usage: d2b <number>"
-    end
-    if test $argv[1] -gt 255
-        echo "Can only convert one byte"
-    end
+	if test (count $argv) -ne 1
+		echo "Usage: d2b <number>"
+	end
+	if test $argv[1] -gt 255
+		echo "Can only convert one byte"
+	end
 
-    set -l n $argv[1]
-    set -l res
-    for i in (seq 7 -1 0)
-        if test 0 -eq (math bitand $n, 2^$i)
-            set -a res 0
-        else
-            set -a res 1
-        end
-    end
-    echo $res
+	set -l n $argv[1]
+	set -l res
+	for i in (seq 7 -1 0)
+		if test 0 -eq (math bitand $n, 2^$i)
+			set -a res 0
+		else
+			set -a res 1
+		end
+	end
+	echo $res
 end
 
 

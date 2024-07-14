@@ -1,0 +1,5 @@
+[font]
+normal = ["JetBrains Mono"]
+size = 9.0
+features = { "JetBrains Mono" = [ "+calt", ] }
+

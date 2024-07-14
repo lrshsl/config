@@ -2,6 +2,12 @@
 # config
 My personal configuration for my terminal live: vimrc, fish abbreviations and just stuff to remember when I switch to a new linux distro or simply want to reconfigure something from a clean slate.
 
+Contents:
+- [To remember](#to-remember-for-new-systems)
+- [Universal scripts && commands](#universal-scripts-commands)
+    - Keyboard layout with setxkbmap
+    - Multi monitor setup (X11)
+
 
 ## To remember for new systems
 
