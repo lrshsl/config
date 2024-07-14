@@ -1,0 +1,4 @@
+
+xrandr --output <DISP2> --same-as <DISP1>
+setxkbmap "us(colemak),ch" -option "grp:shifts_toggle"
+arandr (monitor management)
