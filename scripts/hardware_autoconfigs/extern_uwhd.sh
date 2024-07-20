@@ -1,11 +1,11 @@
 #!/bin/sh
 
-# loads extern_uwhd
+# loads extern_uwhd configuration
 # - external ultrawide screen
 # - external keyboard that expects us layout
 
-autorandr --load extern_uwhd
-setxkbmap us
+setxkbmap "us,ch" -option 
 
 nitrogen --set-zoom ~/Pictures/wallpapers/dark_moon3.png
 
+notify-send -i display "Autorandr profile" "Home configuration loaded"
