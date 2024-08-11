@@ -3,7 +3,7 @@ echo "Note: should be executed from the same directory as the config scripts"
 echo "Note: autorandr should be installed"
 echo "Note: May need to run this file as root (for chmod +x)"
 
-file_names=("laptop" "ext_default" "extern_uwhd")
+file_names=("laptop" "ext_default" "extern_uwhd", "ext_only")
 
 for file_name in "${file_names[@]}"; do
 	chmod +x "$file_name.sh"
