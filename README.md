@@ -7,6 +7,7 @@ Contents:
 - [Universal scripts && commands](#universal-scripts-commands)
     - Keyboard layout with setxkbmap
     - Multi monitor setup (X11)
+    - [tty](#tty)
 
 
 ## To remember for new systems
@@ -174,3 +175,10 @@ reboot
 After playing with those commands and rebooting, I installed blueman again and it worked.
 
 
+## TTY
+
+```sh
+loadkeys us colemak
+setfont ter-u14n.psf.gz
+echo -e '\033[?8;0;0c' 		# green block cursor
+```
