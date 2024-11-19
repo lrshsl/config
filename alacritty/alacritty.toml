@@ -25,6 +25,10 @@ foreground = "#F9F9F9"
 [font]
 size = 7.0
 
+[font.normal]
+family = "JetBrains Mono"
+style = "Light"
+
 [font.bold]
 family = "JetBrains Mono"
 style = "Bold"
@@ -37,12 +41,8 @@ style = "Bold Italic"
 family = "JetBrains Mono"
 style = "Italic"
 
-[font.normal]
-family = "JetBrains Mono"
-style = "Regular"
-
 [scrolling]
 history = 50000
 
 [window]
-opacity = 0.99
+opacity = 0.95

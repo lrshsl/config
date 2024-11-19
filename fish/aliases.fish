@@ -6,11 +6,11 @@
 # `most ytop tealdeer`
 
 
-
 ### Terminal ###
 function clear_screen
 	clear && echo
 end
+
 
 # Terminal itself
 abbr c            clear_screen
@@ -25,10 +25,13 @@ abbr zl           'zellij -l'
 abbr za           'zellij a'
 abbr zn           'zellij -s'
 
-abbr m            make run
-abbr mk           make
+abbr m            make
+abbr mr           make run
+abbr ca           cargo
 abbr cr           cargo run --
 abbr zr           zig build run --
+abbr nr           nimble run --
+abbr or           odin run .
 
 ### Pacman ###
 abbr get          'sudo pacman -S'
@@ -40,15 +43,19 @@ abbr g                      git
 abbr go                     git checkout
 abbr ga                     git add
 abbr --set-cursor   gm      'git commit -m "%"'
-abbr gp                     'tok_gt && git push'
+abbr gp                     git push
+abbr gpu                    git pull
+abbr gf                     git fetch
 abbr gs                     git status
+abbr gst                    git stash
 abbr gd                     git diff
 
-abbr gt                     git lg
-abbr gl                     git log
+abbr gl                     git logtree
+abbr gls                    git logtree
+abbr glo                    git log
 
 ### Fish ###
-abbr fn            'funced -e nvim -s'
+abbr fn           'funced -e nvim -s'
 
 function last_history_item
 	echo $history[1]
