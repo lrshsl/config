@@ -7,6 +7,8 @@ Contents:
 - [Universal scripts && commands](#universal-scripts-commands)
     - Keyboard layout with setxkbmap
     - Multi monitor setup (X11)
+    - [tty](#tty)
+- [Troubleshooting](#troubleshooting)
 
 
 ## To remember for new systems
@@ -95,7 +97,18 @@ xrdb -merge ~/.Xresources
 > When an error occurs about fonts (`char width can't be calculated` or similar), just first try to increase the font size.
 > Don't ask.
 
-## Bluetooth
+
+## TTY
+
+```sh
+loadkeys us colemak
+setfont ter-u14n.psf.gz
+echo -e '\033[?8;0;0c' 		# green block cursor
+```
+
+## Troubleshooting
+
+### Bluetooth
 
 Error: `No default controler available`
 
@@ -172,5 +185,42 @@ reboot
 ```
 
 After playing with those commands and rebooting, I installed blueman again and it worked.
+
+
+
+### Virtualbox
+
+#### Error kernel driver not installed
+
+Error:
+> Kernel driver not installed (rc = -1908)
+>
+> The VirtualBox Linux kernel driver (vboxdrv) is either not loaded or there is a permission problem with / dev / vboxdrv. Please reinstall the kernel module by executing
+> '/sbin/vboxconfig'
+> as root.
+> 
+> where: suplibOsInit what: 3 VERR_VM_DRIVER_NOT_INSTALLED (-1908) - The driver support is not installed. On linux, open returned ENOENT.
+
+`/sbin/vboxconfig` does not exist.
+
+- Make sure the kernel, headers and host-modules are installed and updated
+	- linux kernel: `sudo pacman -S linux linux-headers virtualbox-host-modules-arch`
+	- other kernels need `virtualbox-host-dkms` instead of `virtualbox-host-modules-arch`
+	- linux zen: `sudo pacman -S linux linux-headers virtualbox-host-dkms`
+- To load mandatory module: `sudo modprobe vboxdrv`
+	- see [archwiki](https://wiki.archlinux.org/title/VirtualBox#Load_the_VirtualBox_kernel_modules)
+- Try reinstalling / uninstalling other kernels..
+	- Full system update: `sudo pacman -Syyu`
+- Reboot
+
+
+#### Install guest editions
+
+1. Install iso
+	- `sudo pacman -S virtual-guest-iso`
+	- It will be installed to `/usr/lib/virtualbox/additions/VBoxGuestAdditions.iso`
+2. Mount it from the vm
+3. Open it in a file explorer
+4. Run the executable
 
 
