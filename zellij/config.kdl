@@ -207,34 +207,16 @@ load_plugins {
 
 on_force_close "detach" // "quit"
 
-//  Send a request for a simplified ui (without arrow fonts) to plugins
-//  Options:
-//    - true
-//    - false (Default)
-//
 simplified_ui true
 
-// Choose the path to the default shell that zellij will use for opening new panes
-// Default: $SHELL
-//
 default_shell "fish"
 
 // Choose the path to override cwd that zellij will use for opening new panes
 //
 // default_cwd ""
 
-// Toggle between having pane frames around the panes
-// Options:
-//   - true (default)
-//   - false
-//
 pane_frames false
 
-// Toggle between having Zellij lay out panes according to a predefined set of layouts whenever possible
-// Options:
-//   - true (default)
-//   - false
-//
 // auto_layout true
 
 // Whether sessions should be serialized to the cache folder (including their tabs/panes, cwds and running commands) so that they can later be resurrected
@@ -243,13 +225,9 @@ pane_frames false
 //   - true (default)
 //   - false
 //
-// session_serialization false
+session_serialization true
 
 // Whether pane viewports are serialized along with the session, default is false
-// (Requires restart)
-// Options:
-//   - true
-//   - false (default)
 //
 // serialize_pane_viewport true
 
