@@ -1,3 +1,6 @@
+if not status is-interactive
+    exit
+end
 
 # Dependencies:
 # `exa ripgrep fd dust zoxide`
@@ -18,8 +21,8 @@ abbr q            exit
 abbr rbt          reboot
 abbr po           poweroff
 
-abbr n            nvim .
-abbr nv           neovide .
+abbr n            nvim
+abbr nv           neovide 
 
 abbr zl           'zellij -l'
 abbr za           'zellij a'
@@ -49,6 +52,15 @@ abbr gf                     git fetch
 abbr gs                     git status
 abbr gst                    git stash
 abbr gd                     git diff
+
+function set-git-id
+	if test (count $argv) -ne 2
+		echo "usage: $1 <username> <email>"
+	end
+
+	git config user.name $argv[1]
+	git config user.email $argv[2]
+end
 
 abbr gl                     git logtree
 abbr gls                    git logtree
