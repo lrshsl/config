@@ -64,8 +64,8 @@ grep -E "caps:" /usr/share/X11/xkb/rules/base.lst
 ```
 
 ## Multi monitor setup (X11)
-    - (a|x)randr
-    - autorandr for automation --> See [scripts/](scripts/)
+- (a|x)randr
+- autorandr for automation --> See [scripts](scripts/)
 
 ```sh
 # duplicate monitor
@@ -206,7 +206,7 @@ Error:
 - Make sure the kernel, headers and host-modules are installed and updated
 	- linux kernel: `sudo pacman -S linux linux-headers virtualbox-host-modules-arch`
 	- other kernels need `virtualbox-host-dkms` instead of `virtualbox-host-modules-arch`
-	- linux zen: `sudo pacman -S linux linux-headers virtualbox-host-dkms`
+	- linux zen: `sudo pacman -S linux-zen linux-zen-headers virtualbox-host-dkms`
 - To load mandatory module: `sudo modprobe vboxdrv`
 	- see [archwiki](https://wiki.archlinux.org/title/VirtualBox#Load_the_VirtualBox_kernel_modules)
 - Try reinstalling / uninstalling other kernels..
@@ -217,10 +217,8 @@ Error:
 #### Install guest editions
 
 1. Install iso
-	- `sudo pacman -S virtual-guest-iso`
+	- `sudo pacman -S virtualbox-guest-iso`
 	- It will be installed to `/usr/lib/virtualbox/additions/VBoxGuestAdditions.iso`
 2. Mount it from the vm
 3. Open it in a file explorer
 4. Run the executable
-
-
