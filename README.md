@@ -222,3 +222,13 @@ Error:
 2. Mount it from the vm
 3. Open it in a file explorer
 4. Run the executable
+
+
+
+## Python-tk error
+
+    import _tkinter # If this fails your Python may not be configured for Tk
+
+Installing tk via package manager solved it:
+
+	sudo pacman -S tk
