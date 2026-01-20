@@ -1,0 +1,43 @@
+
+map mkmap [mods*] + [key] -> wm-cmd [action] => '(command: [action], value: "", modifier: \["[mods*]"\], key: "[key]")'
+map mkmap [mods*] + [key] -> [action] =>  ''
+
+map shortcuts =>
+''''
+		 // Shortcuts
+		 (command: Execute, value: "rofi -show drun", modifier: ["Mod1"], key: "space"),
+		 (command: Execute, value: "alacritty", modifier: ["modkey", "Shift"], key: "Return"),
+		 (command: Execute, value: "alacritty -e fish", modifier: ["Mod1"], key: "Return"),
+
+		 (command: ToggleFloating, value: "", modifier: ["Mod4"], key: "f"),
+
+		 (command: SoftReload, value: "", modifier: ["Mod4", "Shift"], key: "r"),
+		 (command: SoftReload, value: "", modifier: ["Mod1", "Shift"], key: "Return"),
+		 (command: Execute, value: "loginctl kill-session $XDG_SESSION_ID", modifier: ["modkey", "Shift"], key: "x"),
+		 (command: Execute, value: "slock", modifier: ["modkey"], key: "l"),
+
+		 (command: Execute, value: "brightnessctl set +5%", modifier: [], key: "XF86MonBrightnessUp"),
+		 (command: Execute, value: "brightnessctl set 5%-", modifier: [], key: "XF86MonBrightnessDown"),
+
+		 (command: SetMarginMultiplier, value: "0", modifier: ["modkey", "Shift"], key: "0"),
+
+		 (command: NextLayout, value: "", modifier: ["modkey", "Control"], key: "e"),
+		 (command: PreviousLayout, value: "", modifier: ["modkey", "Control"], key: "n"),
+
+		 // Windows
+		 (command: CloseWindow, value: "", modifier: ["Mod1"], key: "c"),
+		 (command: ToggleFullScreen, value: "", modifier: ["Mod4"], key: "m"),
+
+		 (command: MoveWindowUp, value: "", modifier: ["Mod1", "Shift"], key: "e"),
+		 (command: MoveWindowDown, value: "", modifier: ["Mod1", "Shift"], key: "n"),
+		 (command: MoveWindowTop, value: "", modifier: ["Mod1", "Shift"], key: "Return"),
+
+		 (command: FocusWindowUp, value: "", modifier: ["Mod1"], key: "e"),
+		 (command: FocusWindowDown, value: "", modifier: ["Mod1"], key: "n"),
+		 (command: FocusWorkspaceNext, value: "", modifier: ["Mod1"], key: "i"),
+		 (command: FocusWorkspacePrevious, value: "", modifier: ["Mod1"], key: "h"),
+''''
+
+[shortcuts]
+
+| vim: ft=exr

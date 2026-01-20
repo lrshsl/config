@@ -1,0 +1,11 @@
+#!/bin/env bash
+
+# Runs apertus 8b instruct through ollama and open-webui on port 8080 through
+# docker
+
+ollama serve &> /dev/null &
+ollama run MichelRosselli/apertus:8b-instruct-2509-q4_k_m &> /dev/null &
+
+docker run -d --network=host -v open-webui:/app/backend/data -e OLLAMA_BASE_URL=http://127.0.0.1:11434 --name open-webui --restart always ghcr.io/open-webui/open-
+webui:main
+

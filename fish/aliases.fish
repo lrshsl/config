@@ -38,7 +38,7 @@ abbr or           odin run .
 
 ### Pacman ###
 abbr get          'sudo pacman -S'
-abbr up           'sudo pacman -Syyu --noconfirm'
+abbr upd          'sudo pacman -Syyu --noconfirm'
 abbr rem          'sudo pacman -Rns'
 
 ### Git ###
@@ -46,6 +46,7 @@ abbr g                      git
 abbr go                     git checkout
 abbr ga                     git add
 abbr --set-cursor   gm      'git commit -m "%"'
+abbr --set-cursor   gam     'git commit -am "%"'
 abbr gp                     git push
 abbr gpu                    git pull
 abbr gf                     git fetch
@@ -87,22 +88,24 @@ abbr -p=anywhere --set-cursor mm '~/%'
 #abbr man         tldr
 # alias z         zoxide
 abbr cd           z
+abbr dust         'br -w'
+abbr cat          bat
 
 
 
 ### ls or tree ###
 
-# Make exa show icons by default
-alias exa 'exa --icons'
+# Make eza show icons by default
+alias eza 'eza --icons'
 
 function lstree
 	if test (count $argv) = 0
-		exa -TL 1 2> /dev/null
+		eza -TL 1 2> /dev/null
 		or tree -CL 1 2> /dev/null
 		or ls -l
 	else
-		exa -TL $argv 2> /dev/null
-		or exa -TL 1 $argv
+		eza -TL $argv 2> /dev/null
+		or eza -TL 1 $argv
 
 		or tree -CL $argv 2> /dev/null
 		or tree -CL 1 $argv
@@ -114,11 +117,11 @@ end
 
 #-- List version --#
 
-abbr l            'exa'
-abbr ls           'exa -l'
-abbr la           'exa -la'
-abbr lst          lstree
-abbr t            lstree
+# abbr l            'eza'
+# abbr ls           'eza -l'
+# abbr la           'eza -la'
+# abbr lst          lstree
+# abbr t            lstree
 
 
 #-- Tree version --#
@@ -164,6 +167,10 @@ function d2b
         end
     end
     echo $res
+end
+
+function quick-scripts
+   lstree ~/config/scripts/
 end
 
 
