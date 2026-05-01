@@ -24,7 +24,7 @@ abbr po           poweroff
 abbr n            nvim
 abbr nv           neovide 
 
-abbr zl           'zellij -l'
+abbr zl           'zellij'
 abbr za           'zellij a'
 abbr zn           'zellij -s'
 
@@ -32,6 +32,7 @@ abbr m            make
 abbr mr           make run
 abbr ca           cargo
 abbr cr           cargo run --
+abbr ct           cargo test --all
 abbr zr           zig build run --
 abbr nr           nimble run --
 abbr or           odin run .
@@ -127,7 +128,6 @@ end
 #-- Tree version --#
 
 abbr l            lstree
-abbr ls           lstree 2
 abbr la           lstree 1 -la
 abbr lst          lstree 3
 abbr t            broot
@@ -142,6 +142,7 @@ abbr l4           lstree 4
 abbr l5           lstree 5
 
 
+alias copy="xclip -selection clipboard"
 
 
 

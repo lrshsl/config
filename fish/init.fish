@@ -2,6 +2,7 @@ if not status is-interactive
     exit
 end
 
+fish_add_path $HOME/bin
 fish_add_path $HOME/.cargo/bin
 fish_add_path $HOME/.nimble/bin
 fish_add_path $HOME/.nix-profile/bin
