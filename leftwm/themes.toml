@@ -21,6 +21,7 @@ current = false
 
 [[repos.themes]]
 name = "Ascent"
+directory = "/home/lnx/.config/leftwm/themes/Ascent"
 repository = "https://gitlab.com/mWalrus/ascent"
 commit = "*"
 version = "1.0.0"
@@ -238,7 +239,7 @@ current = false
 
 [[repos.themes]]
 name = "Zexanima"
-repository = "https://github.com/calebgasser/zexanima-leftwm-theme/tree/develop"
+repository = "https://github.com/calebgasser/zexanima-leftwm-theme/"
 commit = "*"
 version = "0.0.1"
 leftwm_versions = ">0.3.0"
@@ -251,18 +252,25 @@ repository = "https://github.com/zawesomekid/Blood-Moon-leftwm-theme"
 commit = "*"
 version = "0.0.1"
 leftwm_versions = ">0.3.0"
-current = true
+current = false
 
 [[repos.themes]]
 name = "Late-Night"
+directory = "/home/lnx/.config/leftwm/themes/Late-Night"
 repository = "https://github.com/JacoMalan1/LateNight"
 commit = "*"
 version = "0.0.2"
 leftwm_versions = ">0.3.0"
-current = false
+current = true
 
 [[repos]]
 url = "localhost"
 name = "LOCAL"
 definitions_version = 1
-themes = []
+
+[[repos.themes]]
+name = "cyan-glow"
+directory = "/home/lnx/.config/leftwm/themes/cyan-glow"
+version = "0.0.0"
+leftwm_versions = "*"
+current = false

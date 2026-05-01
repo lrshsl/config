@@ -1,0 +1,4 @@
+
+map terminal main => 'ghostty'
+map terminal secondary => 'xfce4-terminal'
+map terminal dropdown => 'xfce4-terminal --drop-down'

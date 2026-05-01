@@ -1,0 +1,20 @@
+import ./leftwm_definitions
+import ./defaults
+
+map all-keybinds => [..
+   | Launcher
+   bind: meta [space] -> "rofi -show drun"
+   bind: meta shift [space] -> "rofi -show run"
+
+   | Terminal
+   bind: meta [ret] -> "ghostty"
+   bind: super [ret] -> "[terminal secondary]"
+   bind: meta t -> "[terminal dropdown]"
+
+   | Toggle polybar
+   bind: super b -> "killall polybar"
+   bind: super shift b -> "polybar"
+
+   | Meh shortcuts
+..]
+

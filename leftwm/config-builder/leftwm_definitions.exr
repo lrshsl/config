@@ -1,0 +1,49 @@
+
+map ret => 'Return'
+map space => 'space'
+
+map translate [keyname] => [is keyname {
+   'shift' ? '"Shift"',
+   'ctrl'  ? '"Control"',
+   'meta'  ? '"Mod1"',
+   'super' ? '"Mod4"',
+   'meh'   ? [translate ctrl shift meta],
+   'hyper' ? [translate ctrl shift meta super],
+}]
+
+map translate [k1] [k2] =>
+   '[translate k1], [translate k2]'
+
+map translate [k1] [k2] [k3] =>
+   '[translate k1], [translate k2], [translate k3]'
+
+map translate [k1] [k2] [k3] [k4] =>
+   '[translate k1], [translate k2], [translate k3], [translate k4]'
+
+
+
+map mk binding:
+   mods        : [mods],               | String of comma separated values (e.g. '"Control","Shift"')
+   key         : [key:ident],          | String (e.g. 'e' or e)
+   action type : [action_type:ident],  | String (e.g. 'Execute' or Execute)
+   action      : [action]              | String (e.g. 'notify-send Hii')
+=> ''
+   ( command: [action_type],
+      value: "[action]",
+      modifier: \[ [mods] \],
+      key: "[key]"
+   ),
+''
+
+map bind: [m1:ident] [key:ident] -> [action] => [mk binding:
+   mods: [translate m1],
+   key: [key],
+   action type: Execute,
+   action: [action]]
+
+map bind: [m1:ident] [m2:ident] [key:ident] -> [action] => [mk binding:
+   mods: [translate m1 m2],
+   key: [key],
+   action type: Execute,
+   action: [action]]
+
