@@ -108,14 +108,14 @@
 
 
    ( command: Execute,
-      value: "[terminal secondary]",
+      value: "xfce4-terminal",
       modifier: [ "Mod4" ],
       key: "Return"
    ),
 
 
    ( command: Execute,
-      value: "[terminal dropdown]",
+      value: " xfce4-terminal --drop-down --title 'dropdown-scratch-terminal' ",
       modifier: [ "Mod1" ],
       key: "t"
    ),
@@ -132,6 +132,111 @@
       value: "polybar",
       modifier: [ "Mod4", "Shift" ],
       key: "b"
+   ),
+
+
+   ( command: Execute,
+      value: "firefox",
+      modifier: [ "Control", "Shift", "Mod1" ],
+      key: "b"
+   ),
+
+
+   ( command: Execute,
+      value: "neovide",
+      modifier: [ "Control", "Shift", "Mod1" ],
+      key: "period"
+   ),
+
+
+   ( command: CloseWindow,
+      value: "",
+      modifier: [ "Mod1" ],
+      key: "c"
+   ),
+
+
+   ( command: ToggleMaximized,
+      value: "",
+      modifier: [ "Control", "Shift", "Mod1" ],
+      key: "m"
+   ),
+
+
+   ( command: ToggleFullScreen,
+      value: "",
+      modifier: [ "Mod4" ],
+      key: "m"
+   ),
+
+
+   ( command: ToggleFloating,
+      value: "",
+      modifier: [ "Mod4", "Shift" ],
+      key: "m"
+   ),
+
+
+   ( command: GotoTag,
+      value: "1",
+      modifier: [ "Mod4" ],
+      key: "a"
+   ),
+
+
+   ( command: GotoTag,
+      value: "2",
+      modifier: [ "Mod4" ],
+      key: "r"
+   ),
+
+
+   ( command: GotoTag,
+      value: "3",
+      modifier: [ "Mod4" ],
+      key: "s"
+   ),
+
+
+   ( command: GotoTag,
+      value: "4",
+      modifier: [ "Mod4" ],
+      key: "t"
+   ),
+
+
+   ( command: GotoTag,
+      value: "5",
+      modifier: [ "Mod4" ],
+      key: "d"
+   ),
+
+
+   ( command: GotoTag,
+      value: "6",
+      modifier: [ "Mod4" ],
+      key: "q"
+   ),
+
+
+   ( command: GotoTag,
+      value: "7",
+      modifier: [ "Mod4" ],
+      key: "w"
+   ),
+
+
+   ( command: GotoTag,
+      value: "8",
+      modifier: [ "Mod4" ],
+      key: "f"
+   ),
+
+
+   ( command: GotoTag,
+      value: "9",
+      modifier: [ "Mod4" ],
+      key: "p"
    ),
 
 
@@ -179,10 +284,6 @@
 
 
 		 //-------- Windows --------//
-
-		 (command: CloseWindow, value: "", modifier: ["Mod1"], key: "c"),
-		 (command: ToggleFullScreen, value: "", modifier: ["Mod4"], key: "m"),
-		 (command: ToggleFloating, value: "", modifier: ["Mod4"], key: "f"),
 
 		 (command: MoveWindowUp, value: "", modifier: ["Mod1", "Shift"], key: "n"),
 		 (command: MoveWindowUp, value: "", modifier: ["Mod1", "Shift"], key: "e"),

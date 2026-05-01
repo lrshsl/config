@@ -2,6 +2,6 @@
 # Re-build the main config file for leftwm.
 # WARNING: This will overwrite ../config.ron
 build-leftwm-config:
-   expandr expand -o ../config.ron leftwm_main.exr
-   leftwm check
+   expandr expand -o ../config.ron leftwm_main.exr \
+   && leftwm check
 

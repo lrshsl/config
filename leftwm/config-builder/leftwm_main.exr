@@ -133,10 +133,6 @@ import ./keymaps
 
 		 //-------- Windows --------//
 
-		 (command: CloseWindow, value: "", modifier: \["Mod1"\], key: "c"),
-		 (command: ToggleFullScreen, value: "", modifier: \["Mod4"\], key: "m"),
-		 (command: ToggleFloating, value: "", modifier: \["Mod4"\], key: "f"),
-
 		 (command: MoveWindowUp, value: "", modifier: \["Mod1", "Shift"\], key: "n"),
 		 (command: MoveWindowUp, value: "", modifier: \["Mod1", "Shift"\], key: "e"),
 		 (command: MoveWindowDown, value: "", modifier: \["Mod1", "Shift"\], key: "i"),

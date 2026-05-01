@@ -1,4 +1,10 @@
 
 map terminal main => 'ghostty'
 map terminal secondary => 'xfce4-terminal'
-map terminal dropdown => 'xfce4-terminal --drop-down'
+|| Custom title for pattern matching in window_rules
+map terminal dropdown => '' xfce4-terminal --drop-down --title 'dropdown-scratch-terminal' ''
+
+map browser main => 'firefox'
+map browser chrome-based => 'chromium'
+map browser private => 'torbrowser-launcher'
+

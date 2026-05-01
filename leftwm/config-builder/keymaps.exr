@@ -3,18 +3,39 @@ import ./defaults
 
 map all-keybinds => [..
    | Launcher
-   bind: meta [space] -> "rofi -show drun"
-   bind: meta shift [space] -> "rofi -show run"
+   bind: alt [space] -> "rofi -show drun"
+   bind: alt shift [space] -> "rofi -show run"
 
    | Terminal
-   bind: meta [ret] -> "ghostty"
-   bind: super [ret] -> "[terminal secondary]"
-   bind: meta t -> "[terminal dropdown]"
+   bind: alt [ret] -> [terminal main]
+   bind: super [ret] -> [terminal secondary]
+   bind: alt t -> [terminal dropdown]
 
    | Toggle polybar
    bind: super b -> "killall polybar"
-   bind: super shift b -> "polybar"
+   bind: super shift b -> 'polybar'
 
    | Meh shortcuts
+   bind: meh b -> [browser main]
+   bind: meh [dot] -> "neovide"
+
+
+   | Window management
+   bind: alt c -> leftwm CloseWindow
+   bind: meh m -> leftwm ToggleMaximized
+   bind: super m -> leftwm ToggleFullScreen
+   bind: super shift m -> leftwm ToggleFloating
+
+   | Tag switching
+   bind: super a -> tag 1
+   bind: super r -> tag 2
+   bind: super s -> tag 3
+   bind: super t -> tag 4
+   bind: super d -> tag 5
+
+   bind: super q -> tag 6
+   bind: super w -> tag 7
+   bind: super f -> tag 8
+   bind: super p -> tag 9
 ..]
 

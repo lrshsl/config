@@ -1,14 +1,23 @@
 
+| Find more keys: https://github.com/leftwm/lefthk/blob/main/lefthk-core/src/xkeysym_lookup.rs#L50
+
 map ret => 'Return'
 map space => 'space'
+map dot => 'period'
+map comma => 'comma'
 
 map translate [keyname] => [is keyname {
-   'shift' ? '"Shift"',
-   'ctrl'  ? '"Control"',
-   'meta'  ? '"Mod1"',
-   'super' ? '"Mod4"',
-   'meh'   ? [translate ctrl shift meta],
-   'hyper' ? [translate ctrl shift meta super],
+   'shift'? '"Shift"',
+   'ctrl' ? '"Control"',
+
+   'meta'? '"Mod1"',
+   'alt' ? '"Mod1"',
+
+   'super'  ? '"Mod4"',
+   'windows'? '"Mod4"',
+
+   'meh'  ? [translate 'ctrl' 'shift' 'meta'],
+   'hyper'? [translate 'ctrl' 'shift' 'meta' 'super'],
 }]
 
 map translate [k1] [k2] =>
@@ -46,4 +55,26 @@ map bind: [m1:ident] [m2:ident] [key:ident] -> [action] => [mk binding:
    key: [key],
    action type: Execute,
    action: [action]]
+
+
+| Tag switching
+map bind: [m1:ident] [key:ident] -> tag [n] => [mk binding:
+   mods: [translate m1],
+   key: [key],
+   action type: GotoTag,
+   action: [n]]
+
+
+| Leftwm commands
+map bind: [m1:ident] [key:ident] -> leftwm [cmd:ident] => [mk binding:
+   mods: [translate m1],
+   key: [key],
+   action type: [cmd],
+   action: ""]
+
+map bind: [m1:ident] [m2:ident] [key:ident] -> leftwm [cmd:ident] => [mk binding:
+   mods: [translate m1 m2],
+   key: [key],
+   action type: [cmd],
+   action: ""]
 
