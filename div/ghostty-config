@@ -1,0 +1,35 @@
+
+background = #000000
+
+font-family = ""
+font-family = "JetBrains Mono Light"
+font-size = 20
+
+cursor-style = bar
+cursor-style-blink = false
+
+shell-integration = fish
+shell-integration-features = no-cursor
+
+title = ""
+window-decoration = none
+window-show-tab-bar = never
+working-directory = inherit
+gtk-single-instance = false
+window-inherit-working-directory = false
+tab-inherit-working-directory = true
+
+
+# <Meta-h> => 'tldr' [[cmd]]<CR>
+keybind = alt+h=text:\x01man \x0d
+keybind = ctrl+h=text:\x01tldr \x0d
+
+keybind = ctrl+t>n=new_tab
+keybind = ctrl+t>ctrl+o=next_tab
+keybind = ctrl+t>ctrl+n=previous_tab
+
+keybind = ctrl+s>n=new_split:auto
+keybind = ctrl+s>ctrl+o=goto_split:next
+keybind = ctrl+s>ctrl+n=goto_split:previous
+
+# vim: ft=toml
