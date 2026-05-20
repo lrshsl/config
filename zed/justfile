@@ -1,0 +1,7 @@
+
+
+build:
+    expandr expand -o out.json main.exr
+
+replace:
+    expandr expand -o ~/.config/zed/keymap.json main.exr

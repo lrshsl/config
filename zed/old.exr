@@ -1,0 +1,22 @@
+map old_mappings => '''
+\[
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-shift-e": "project_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "AgentPanel",
+    "unbind": {
+      "ctrl-shift-e": "project_panel::ToggleFocus",
+    },
+  },
+  {
+    "context": "Workspace || AgentPanel",
+    "bindings": {
+      "ctrl-shift-e": "project_panel::Toggle",
+    },
+  },
+\]
+'''

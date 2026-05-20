@@ -1,0 +1,48 @@
+import ./old
+import ./zed_keybind
+
+
+file [..
+   | Terminal
+   nmap 'space t' -> 'terminal_panel::Toggle'
+   tmap 't n'     -> 'terminal_panel::Toggle'
+
+   | Insert mode
+   imap 't n'     -> 'vim::NormalBefore'
+
+   nmap 'space f f' -> 'file_finder::Toggle'
+
+   | Navigation
+   nmap 'space i' -> 'workspace::ActivateNextPane'
+   nmap 'space h' -> 'workspace::ActivatePreviousPane'
+
+   | Repl
+   nmap 'shift-enter' -> 'repl::RunInPlace'
+   nmap 'ctrl-backspace' -> 'repl::ClearCurrentOutput'
+
+   | Normal mode navigation
+   nvmap 'n' -> 'vim::Down'
+   nvmap 'N' -> keys '5 n'
+   nvmap 'e' -> 'vim::Up'
+   nvmap 'E' -> keys '5 e'
+   nvmap 'i' -> 'vim::Right'
+   nvmap 'I' -> 'vim::EndOfLine'
+   nvmap 'H' -> 'vim::StartOfLine'
+   nvmap 'k' -> 'vim::NextWordEnd'
+   | todo: K
+
+   nmap 'l' -> 'vim::InsertBefore'
+   nmap 'L' -> 'vim::InsertFirstNonWhitespace'
+   nmap 'M' -> 'vim::JoinLines'
+   nmap 'j' -> 'vim::MoveToNextMatch'
+   nmap 'J' -> 'vim::MoveToPreviousMatch'
+
+   | Misc
+   nmap 'space w' -> 'workspace::Save'
+   nmap 'space q' -> 'pane::CloseActiveItem'
+
+   [binding
+      (context: 'Workspace || AgentPanel')
+      'ctrl-shift-e' -> 'project_panel::Toggle']
+..]
+

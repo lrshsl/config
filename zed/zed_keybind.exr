@@ -1,0 +1,52 @@
+map mode [mode:ident] => [is mode {
+   'normal' ? 'Editor && vim_mode == normal',
+   'insert' ? 'Editor && vim_mode == insert',
+   'visual' ? 'Editor && vim_mode == visual',
+   'terminal' ? 'Terminal',
+   'workspace' ? 'Workspace',
+
+   'nv' ? 'Editor && (vim_mode == normal || vim_mode == visual)',
+}]
+
+map binding
+   (context: [ctx])
+   [keys] -> [action]
+=>
+   '\t{"context":"[ctx]","bindings":{"[keys]":"[action]"}},'
+
+
+map nmap [keys] -> keys [action] =>
+   '\t{"context":"[mode normal]","bindings":{"[keys]":\[ "workspace::SendKeystrokes", "[action]"\]}},'
+
+map nmap [keys] -> [action] =>
+   [binding
+      (context: [mode normal])
+      [keys] -> [action]]
+
+map imap [keys] -> [action] =>
+   [binding
+      (context: [mode insert])
+      [keys] -> [action]]
+
+map tmap [keys] -> [action] =>
+   [binding
+      (context: [mode terminal])
+      [keys] -> [action]]
+
+map wmap [keys] -> [action] =>
+   [binding
+      (context: [mode workspace])
+      [keys] -> [action]]
+
+map nvmap [keys] -> [action] =>
+   [binding
+      (context: [mode nv])
+      [keys] -> [action]]
+
+map nvmap [keys] -> keys [action] =>
+   '\t{"context":"[mode nv]","bindings":{"[keys]":\[ "workspace::SendKeystrokes", "[action]"\]}},'
+
+
+map file [mappings] => '\[
+[mappings]\
+\]'
