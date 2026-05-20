@@ -1,52 +1,55 @@
-map mode [mode:ident] => [is mode {
-   'normal' ? 'Editor && vim_mode == normal',
-   'insert' ? 'Editor && vim_mode == insert',
-   'visual' ? 'Editor && vim_mode == visual',
-   'terminal' ? 'Terminal',
-   'workspace' ? 'Workspace',
+map translate mode [mode] => [is mode {
+   'n' ? 'Editor && vim_mode == normal',
+   'i' ? 'Editor && vim_mode == insert',
+   'v' ? 'Editor && vim_mode == visual',
+   't' ? 'Terminal',
+
+   'w' ? 'Workspace',
+   'WorkspaceOrAgent' ? 'Workspace || AgentPanel',
 
    'nv' ? 'Editor && (vim_mode == normal || vim_mode == visual)',
+
+   | Default case
+   _ ? mode
 }]
 
-map binding
-   (context: [ctx])
-   [keys] -> [action]
-=>
-   '\t{"context":"[ctx]","bindings":{"[keys]":"[action]"}},'
 
-
-map nmap [keys] -> keys [action] =>
-   '\t{"context":"[mode normal]","bindings":{"[keys]":\[ "workspace::SendKeystrokes", "[action]"\]}},'
-
-map nmap [keys] -> [action] =>
-   [binding
-      (context: [mode normal])
-      [keys] -> [action]]
-
-map imap [keys] -> [action] =>
-   [binding
-      (context: [mode insert])
-      [keys] -> [action]]
-
-map tmap [keys] -> [action] =>
-   [binding
-      (context: [mode terminal])
-      [keys] -> [action]]
-
-map wmap [keys] -> [action] =>
-   [binding
-      (context: [mode workspace])
-      [keys] -> [action]]
-
-map nvmap [keys] -> [action] =>
-   [binding
-      (context: [mode nv])
-      [keys] -> [action]]
-
-map nvmap [keys] -> keys [action] =>
-   '\t{"context":"[mode nv]","bindings":{"[keys]":\[ "workspace::SendKeystrokes", "[action]"\]}},'
-
-
-map file [mappings] => '\[
+|| Top level entry point
+map file [mappings]
+=> 
+'''\
+\[
 [mappings]\
-\]'
+\]
+'''
+
+map mode [m:ident] [keybinds]
+=>
+''\t{"context":"[translate mode m]","bindings":{
+[keybinds]
+\t}},
+''
+
+map bind [keys] -> [action]
+=>
+   '\t\t"[keys]":[action],'
+
+
+|-  Actions  -|
+
+|| Run a zed command (e.g. `file_finder::Toggle`)
+map zed [namespace:ident]::[action:ident]
+=> '"[namespace]::[action]"'
+
+|| Run a zed `vim::*` command (e.g. `vim::Up`)
+map vim [action:ident]
+=> '"vim::[action]"'
+
+|| Run a zed `vim::*` command, pass an additional option
+map vim [action:ident] [opt:ident]=[value]
+=> '\[ "vim::[action]",{"[opt]":[value]}]'
+
+|| Send keys
+map keys [keys]
+=> '\[ "workspace::SendKeystrokes","[keys]"\]'
+

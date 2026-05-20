@@ -1,48 +1,54 @@
-import ./old
 import ./zed_keybind
 
 
 file [..
-   | Terminal
-   nmap 'space t' -> 'terminal_panel::Toggle'
-   tmap 't n'     -> 'terminal_panel::Toggle'
 
-   | Insert mode
-   imap 't n'     -> 'vim::NormalBefore'
+   mode i [ bind 't n' -> [zed vim::NormalBefore] ]
+   mode t [ bind 't n' -> [zed terminal_panel::Toggle] ]
 
-   nmap 'space f f' -> 'file_finder::Toggle'
+   mode n [..
 
-   | Navigation
-   nmap 'space i' -> 'workspace::ActivateNextPane'
-   nmap 'space h' -> 'workspace::ActivatePreviousPane'
+      | Zed commands
+      bind 'space t' -> [zed terminal_panel::Toggle]
+      bind 'space f f' -> [zed file_finder::Toggle]
 
-   | Repl
-   nmap 'shift-enter' -> 'repl::RunInPlace'
-   nmap 'ctrl-backspace' -> 'repl::ClearCurrentOutput'
+      | Panes
+      bind 'space h' -> [zed workspace::ActivatePaneLeft]
+      bind 'space n' -> [zed workspace::ActivatePaneDown]
+      bind 'space e' -> [zed workspace::ActivatePaneUp]
+      bind 'space i' -> [zed workspace::ActivatePaneRight]
 
-   | Normal mode navigation
-   nvmap 'n' -> 'vim::Down'
-   nvmap 'N' -> keys '5 n'
-   nvmap 'e' -> 'vim::Up'
-   nvmap 'E' -> keys '5 e'
-   nvmap 'i' -> 'vim::Right'
-   nvmap 'I' -> 'vim::EndOfLine'
-   nvmap 'H' -> 'vim::StartOfLine'
-   nvmap 'k' -> 'vim::NextWordEnd'
-   | todo: K
+      bind 'space w' -> [zed workspace::Save]
+      bind 'space ; w' -> [zed workspace::SaveAll]
+      bind 'space q' -> [zed pane::CloseActiveItem]
 
-   nmap 'l' -> 'vim::InsertBefore'
-   nmap 'L' -> 'vim::InsertFirstNonWhitespace'
-   nmap 'M' -> 'vim::JoinLines'
-   nmap 'j' -> 'vim::MoveToNextMatch'
-   nmap 'J' -> 'vim::MoveToPreviousMatch'
+      bind 'l' -> [vim InsertBefore]
+      bind 'L' -> [vim InsertFirstNonWhitespace]
+      bind 'M' -> [vim JoinLines]
+      bind 'j' -> [vim MoveToNextMatch]
+      bind 'J' -> [vim MoveToPreviousMatch]
 
-   | Misc
-   nmap 'space w' -> 'workspace::Save'
-   nmap 'space q' -> 'pane::CloseActiveItem'
+      | Repl
+      bind 'shift-enter' -> [zed repl::RunInPlace]
+      bind 'ctrl-backspace' -> [zed repl::ClearCurrentOutput]
+   ..]
 
-   [binding
-      (context: 'Workspace || AgentPanel')
-      'ctrl-shift-e' -> 'project_panel::Toggle']
+   | Normal or visual mode
+   mode nv [..
+      bind 'n' -> [vim Down]
+      bind 'N' -> [keys '5 n']
+      bind 'e' -> [vim Up]
+      bind 'E' -> [keys '5 e']
+      bind 'i' -> [vim Right]
+      bind 'I' -> [vim EndOfLine]
+      bind 'H' -> [vim StartOfLine]
+      bind 'k' -> [vim NextWordEnd]
+      bind 'K' -> [vim NextWordEnd ignore_punctuation='true']
+   ..]
+
+   mode WorkspaceOrAgent [
+      bind 'ctrl-shift-e' -> [zed project_panel::Toggle]
+   ]
+
 ..]
 

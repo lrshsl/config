@@ -1,7 +1,10 @@
 
 
 build:
-    expandr expand -o out.json main.exr
+   expandr expand -o out.json main.exr
+
+run: build
+   bat out.json || cat out.json
 
 replace:
-    expandr expand -o ~/.config/zed/keymap.json main.exr
+   expandr expand -o ~/.config/zed/keymap.json main.exr
