@@ -1,6 +1,5 @@
 
 // This config has been generated. Change the leftwm_main.exr file instead.
-
 #![enable(implicit_some)]
 #![enable(unwrap_newtypes)]
 (
@@ -60,12 +59,13 @@
             name: "Ghostty",
             value: "ghostty",
             args: None,
-            x: 860, y: 390,
-            height: 300, width: 200
+            x: 860, y: 50,
+            height: 600, width: 1600
          ),
     ],
     window_rules: [
        ( window_title: "dropdown-scratch-terminal", spawn_floating: true ),
+       ( window_class: "retype", spawn_floating: true ),
        ( window_class: "Godot_Editor", spawn_floating: false ),
     ],
     disable_current_tag_swap: true,
@@ -73,7 +73,7 @@
     disable_window_snap: true,
     focus_behaviour: Sloppy,
     focus_new_windows: true,
-    single_window_border: true,
+    single_window_border: false,
     sloppy_mouse_follows_focus: true,
     create_follows_cursor: None,
     auto_derive_workspaces: true,
@@ -121,16 +121,23 @@
    ),
 
 
-   ( command: Execute,
-      value: "killall polybar",
-      modifier: [ "Mod4" ],
-      key: "b"
+   ( command: ToggleScratchPad,
+      value: "Ghostty",
+      modifier: [ "Control", "Shift", "Mod1" ],
+      key: "t"
    ),
 
 
    ( command: Execute,
-      value: "polybar",
-      modifier: [ "Mod4", "Shift" ],
+      value: "xkill",
+      modifier: [ "Mod4" ],
+      key: "Escape"
+   ),
+
+
+   ( command: Execute,
+      value: " polybar-msg cmd toggle >/dev/null 2>&1 || polybar -c $HOME/.config/leftwm/themes/current/polybar.ini mainbar &> /dev/null & ",
+      modifier: [ "Mod4" ],
       key: "b"
    ),
 
@@ -146,6 +153,41 @@
       value: "neovide",
       modifier: [ "Control", "Shift", "Mod1" ],
       key: "period"
+   ),
+
+
+   ( command: Execute,
+      value: "brightnessctl set +5%",
+      modifier: [   ],
+      key: "XF86MonBrightnessUp"
+   ),
+
+
+   ( command: Execute,
+      value: "brightnessctl set 5%-",
+      modifier: [   ],
+      key: "XF86MonBrightnessDown"
+   ),
+
+
+   ( command: Execute,
+      value: "wpctl set-volume @DEFAULT_SINK@ 0.1+",
+      modifier: [   ],
+      key: "XF86AudioRaiseVolume"
+   ),
+
+
+   ( command: Execute,
+      value: "wpctl set-volume @DEFAULT_SINK@ 0.1-",
+      modifier: [   ],
+      key: "XF86AudioLowerVolume"
+   ),
+
+
+   ( command: Execute,
+      value: "wpctl set-mute @DEFAULT_SINK@ toggle",
+      modifier: [   ],
+      key: "XF86AudioMute"
    ),
 
 
@@ -174,6 +216,34 @@
       value: "",
       modifier: [ "Mod4", "Shift" ],
       key: "m"
+   ),
+
+
+   ( command: FocusWindowUp,
+      value: "",
+      modifier: [ "Mod1" ],
+      key: "n"
+   ),
+
+
+   ( command: FocusWindowUp,
+      value: "",
+      modifier: [ "Mod1" ],
+      key: "e"
+   ),
+
+
+   ( command: FocusWindowDown,
+      value: "",
+      modifier: [ "Mod1" ],
+      key: "i"
+   ),
+
+
+   ( command: FocusWindowDown,
+      value: "",
+      modifier: [ "Mod1" ],
+      key: "o"
    ),
 
 
@@ -240,6 +310,20 @@
    ),
 
 
+   ( command: FocusPreviousTag,
+      value: "",
+      modifier: [ "Mod4" ],
+      key: "n"
+   ),
+
+
+   ( command: FocusNextTag,
+      value: "",
+      modifier: [ "Mod4" ],
+      key: "o"
+   ),
+
+
 
 		 // Terminal
 
@@ -255,8 +339,6 @@
 		 (command: Execute, value: "i3lock -c 000000", modifier: ["modkey"], key: "z"),
 
 		 // Fn-key functions
-		 (command: Execute, value: "brightnessctl set +5%", modifier: [], key: "XF86MonBrightnessUp"),
-		 (command: Execute, value: "brightnessctl set 5%-", modifier: [], key: "XF86MonBrightnessDown"),
 		 // TODO: audio
 
 
@@ -291,10 +373,10 @@
 		 (command: MoveWindowDown, value: "", modifier: ["Mod1", "Shift"], key: "o"),
 		 // (command: MoveWindowTop, value: "", modifier: ["Mod1", "Shift"], key: "space"),
 
-		 (command: FocusWindowUp, value: "", modifier: ["Mod1"], key: "n"),
-		 (command: FocusWindowUp, value: "", modifier: ["Mod1"], key: "e"),
-		 (command: FocusWindowDown, value: "", modifier: ["Mod1"], key: "i"),
-		 (command: FocusWindowDown, value: "", modifier: ["Mod1"], key: "o"),
+		 // (command: FocusWindowUp, value: "", modifier: ["Mod1"], key: "n"),
+		 // (command: FocusWindowUp, value: "", modifier: ["Mod1"], key: "e"),
+		 // (command: FocusWindowDown, value: "", modifier: ["Mod1"], key: "i"),
+		 // (command: FocusWindowDown, value: "", modifier: ["Mod1"], key: "o"),
 
 		 (command: DecreaseMainSize, value: "2", modifier: ["Mod4", "Shift"], key: "n"),
 		 (command: IncreaseMainSize, value: "2", modifier: ["Mod4", "Shift"], key: "o"),
@@ -309,9 +391,6 @@
 
 
 		 //-------- Tags --------//
-
-		 (command: FocusPreviousTag, value: "", modifier: ["Mod4"], key: "n"),
-		 (command: FocusNextTag, value: "", modifier: ["Mod4"], key: "o"),
 
 		 (command: MoveToLastWorkspace, value: "", modifier: ["modkey", "Shift"], key: "w"),
 		 (command: SwapTags, value: "", modifier: ["modkey"], key: "w"),

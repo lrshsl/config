@@ -5,6 +5,7 @@ map ret => 'Return'
 map space => 'space'
 map dot => 'period'
 map comma => 'comma'
+map esc => 'Escape'
 
 map translate [keyname] => [is keyname {
    'shift'? '"Shift"',
@@ -44,12 +45,21 @@ map mk binding:
    ),
 ''
 
+| No mod (e.g. fn keys)
+map bind: [key:ident] -> [action] => [mk binding:
+   mods: ' ',
+   key: [key],
+   action type: Execute,
+   action: [action]]
+
+| 1 mod
 map bind: [m1:ident] [key:ident] -> [action] => [mk binding:
    mods: [translate m1],
    key: [key],
    action type: Execute,
    action: [action]]
 
+| 2 mods
 map bind: [m1:ident] [m2:ident] [key:ident] -> [action] => [mk binding:
    mods: [translate m1 m2],
    key: [key],

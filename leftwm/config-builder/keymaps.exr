@@ -1,6 +1,12 @@
 import ./leftwm_definitions
 import ./defaults
 
+map path to polybar.ini => '$HOME/.config/leftwm/themes/current/polybar.ini'
+map toggle polybar => ' \
+polybar-msg cmd toggle >/dev/null 2>&1 || \
+polybar -c [path to polybar.ini] mainbar &> /dev/null & \
+'
+
 map all-keybinds => [..
    | Launcher
    bind: alt [space] -> "rofi -show drun"
@@ -11,13 +17,30 @@ map all-keybinds => [..
    bind: super [ret] -> [terminal secondary]
    bind: alt t -> [terminal dropdown]
 
+   [mk binding:
+      mods: [translate 'meh'],
+      key: t,
+      action type: ToggleScratchPad,
+      action: "Ghostty"
+   ]
+
+   | x11
+   bind: super [esc] -> "xkill"
+
    | Toggle polybar
-   bind: super b -> "killall polybar"
-   bind: super shift b -> 'polybar'
+   bind: super b -> [toggle polybar]
 
    | Meh shortcuts
    bind: meh b -> [browser main]
    bind: meh [dot] -> "neovide"
+
+   | Fn keys
+   bind: XF86MonBrightnessUp -> "brightnessctl set +5%"
+   bind: XF86MonBrightnessDown -> "brightnessctl set 5%-"
+
+   bind: XF86AudioRaiseVolume -> "wpctl set-volume @DEFAULT_SINK@ 0.1+"
+   bind: XF86AudioLowerVolume -> "wpctl set-volume @DEFAULT_SINK@ 0.1-"
+   bind: XF86AudioMute -> "wpctl set-mute @DEFAULT_SINK@ toggle"
 
 
    | Window management
@@ -25,6 +48,11 @@ map all-keybinds => [..
    bind: meh m -> leftwm ToggleMaximized
    bind: super m -> leftwm ToggleFullScreen
    bind: super shift m -> leftwm ToggleFloating
+
+	bind: alt n -> leftwm FocusWindowUp
+	bind: alt e -> leftwm FocusWindowUp
+	bind: alt i -> leftwm FocusWindowDown
+	bind: alt o -> leftwm FocusWindowDown
 
    | Tag switching
    bind: super a -> tag 1
@@ -37,5 +65,8 @@ map all-keybinds => [..
    bind: super w -> tag 7
    bind: super f -> tag 8
    bind: super p -> tag 9
+
+	bind: super n -> leftwm FocusPreviousTag
+	bind: super o -> leftwm FocusNextTag
 ..]
 
