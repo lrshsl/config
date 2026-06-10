@@ -136,6 +136,20 @@
 
 
    ( command: Execute,
+      value: "switch-tty ",
+      modifier: [ "Mod1" ],
+      key: "Right"
+   ),
+
+
+   ( command: Execute,
+      value: "switch-tty -rev",
+      modifier: [ "Mod1" ],
+      key: "Left"
+   ),
+
+
+   ( command: Execute,
       value: " polybar-msg cmd toggle >/dev/null 2>&1 || polybar -c $HOME/.config/leftwm/themes/current/polybar.ini mainbar &> /dev/null & ",
       modifier: [ "Mod4" ],
       key: "b"

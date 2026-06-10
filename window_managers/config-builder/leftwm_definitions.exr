@@ -7,6 +7,17 @@ map dot => 'period'
 map comma => 'comma'
 map esc => 'Escape'
 
+map arrow up => 'Up'
+map arrow right => 'Right'
+map arrow down => 'Down'
+map arrow right => 'Right'
+|map arrow [direction:ident] => [is direction {
+|   'up' ? 'Up',
+|   'left' ? 'Left',
+|   'down' ? 'Down',
+|   'right' ? 'Right',
+|}]
+
 map translate [keyname] => [is keyname {
    'shift'? '"Shift"',
    'ctrl' ? '"Control"',

@@ -28,6 +28,11 @@ file [..
       bind 'j' -> [vim MoveToNextMatch]
       bind 'J' -> [vim MoveToPreviousMatch]
 
+      | Code stuff
+      bind 'space c a' -> [zed editor::ToggleCodeActions]
+      bind 'space c h' -> [zed editor::Hover]
+      bind 'space c r' -> [zed editor::Rename]
+
       | Repl
       bind 'shift-enter' -> [zed repl::RunInPlace]
       bind 'ctrl-backspace' -> [zed repl::ClearCurrentOutput]
@@ -44,6 +49,8 @@ file [..
       bind 'H' -> [vim StartOfLine]
       bind 'k' -> [vim NextWordEnd]
       bind 'K' -> [vim NextWordEnd ignore_punctuation='true']
+
+      bind 'ctrl-n' -> [keys 'ctrl-y']
    ..]
 
    mode WorkspaceOrAgent [

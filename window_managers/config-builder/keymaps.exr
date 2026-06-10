@@ -7,6 +7,12 @@ polybar-msg cmd toggle >/dev/null 2>&1 || \
 polybar -c [path to polybar.ini] mainbar &> /dev/null & \
 '
 
+|| dir in (prev, next)
+map tty [dir:ident] => '''switch-tty [is dir { 'prev' ? '-rev', }]'''
+
+|| activate in (on, off)
+map fancy mode [activate:ident] => 'fancy-mode [activate]'
+
 map all-keybinds => [..
    | Launcher
    bind: alt [space] -> "rofi -show drun"
@@ -26,6 +32,8 @@ map all-keybinds => [..
 
    | x11
    bind: super [esc] -> "xkill"
+   bind: alt Right -> [tty next]
+   bind: alt Left -> [tty prev]
 
    | Toggle polybar
    bind: super b -> [toggle polybar]

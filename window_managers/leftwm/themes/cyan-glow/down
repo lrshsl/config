@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+leftwm command "UnloadTheme"
+
+pkill polybar
+pkill feh
+pkill picom

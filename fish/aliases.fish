@@ -92,6 +92,11 @@ abbr cd           z
 abbr dust         'br -w'
 abbr cat          bat
 
+abbr rg           'rg -.'
+abbr fd           'fd -H'
+
+abbr rga          'rg -. --no-ignore'
+abbr fda          'fd -H --no-ignore'
 
 
 ### ls or tree ###

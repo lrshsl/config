@@ -1,6 +1,6 @@
 #!/bin/bash
 
-setxkbmap "us(colemak),ch" -option "grp:shifts_toggle"
+#setxkbmap "us(colemak),ch" -option "grp:shifts_toggle"
 
 nitrogen --restore
 # urxvtd &

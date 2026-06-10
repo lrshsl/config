@@ -1,0 +1,17 @@
+
+# Re-build the main config file for leftwm.
+check-leftwm:
+   expandr expand -o tmp_config.ron leftwm_main.exr \
+      && leftwm check tmp_config.ron
+
+replace-dwm:
+   expandr expand -o ../dwm/config.h dwm_main.exr
+   make --directory ../dwm/
+
+# Re-build the main config file for leftwm and replace the active config
+# WARNING: This will overwrite ~/.config/leftwm/config.ron
+replace-leftwm:
+   expandr expand -o $HOME/.config/leftwm/config.ron leftwm_main.exr \
+      && leftwm check \
+      && leftwm command SoftReload
+
