@@ -1,25 +1,33 @@
 import ./dwm
 
-map set [name:ident] = [value] ([type]) =>
-   '''static const [is type { 'bool'? 'int', _? type, }] [name] = [value];'''
+map dmenu_cmd => ''
+"dmenu_run",
+   "-m",  dmenumon,
+   "-fn", dmenufont,
+   "-nb", col_gray1,
+   "-nf", col_gray3,
+   "-sb", col_cyan,
+   "-sf", col_gray4
+''
 
-map true => '1'
-map false => '0'
-
-map alt => 'Mod1'
-map super => 'Mod4'
+map window [dir:ident] => ''focusstack, {.i = [
+   is dir {
+      'next' ? '+1',
+      'prev' ? '-1',
+   }
+]}''
 
 [file
    settings ''[..
-      set borderpx = 1        ('unsigned int')
-      set snap = 32           ('unsigned int')
-      set showbar = [false]   ('bool')
-      set topbar = [true]     ('bool')
-      set mfact = '0.55'      ('float')
-      set nmaster = 1         ('int')
-      set resizehints = 1     ('int')
-      set lockfullscreen = 1  ('int')
-      set refreshrate = 120   ('int')
+      set borderpx = 1             ('unsigned int')
+      set snap = 32                ('unsigned int')
+      set showbar = [false]        ('bool')
+      set topbar = [true]          ('bool')
+      set mfact = '0.55'           ('float')
+      set nmaster = [true]         ('bool')
+      set resizehints = [true]     ('bool')
+      set lockfullscreen = [true]  ('bool')
+      set refreshrate = 120        ('int')
 
       '''
       static const char *fonts\[\] = {"monospace:size=12"};
@@ -57,16 +65,27 @@ map super => 'Mod4'
         .isfloating = 0,
         .monitor = -1},
   ''
+   define '' [..
+      cmd define dmenu = [dmenu_cmd]
+      cmd define ghostty = '"ghostty"'
+      cmd define tty_next = '"switch-tty"'
+      cmd define tty_prev = '"switch-tty", "-rev"'
+   ..] ''
 
    keys mod = [alt] ''
       /* modifier     key        function        argument */
-      {MODKEY,        XK_space,  spawn,          {.v = dmenucmd}   },
-      {MODKEY,        XK_Return, spawn,          {.v = termcmd}    },
+      [..
+         bind: alt [space] -> [cmd run dmenu]
+         bind: alt [return] -> [cmd run ghostty]
+         bind: alt [arrow right] -> [cmd run tty_next]
+         bind: alt [arrow left] -> [cmd run tty_prev]
+
+         bind: alt i -> [window next]
+         bind: alt h -> [window prev]
+         bind: alt n -> [window next]
+         bind: alt e -> [window prev]
+      ..]
       {MODKEY,        XK_b,      togglebar,      {0}               },
-      {MODKEY,        XK_i,      focusstack,     {.i = +1}         },
-      {MODKEY,        XK_h,      focusstack,     {.i = -1}         },
-      {MODKEY,        XK_e,      incnmaster,     {.i = +1}         },
-      {MODKEY,        XK_n,      incnmaster,     {.i = -1}         },
       {MODKEY,        XK_r,      setmfact,       {.f = -0.05}      },
       {MODKEY,        XK_s,      setmfact,       {.f = +0.05}      },
       {MODKEY,        XK_equal,  zoom,           {0}               },

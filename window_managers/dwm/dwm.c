@@ -1678,7 +1678,7 @@ void showhide(Client *c) {
 void spawn(const Arg *arg) {
 	struct sigaction sa;
 
-	if ( arg->v == dmenucmd ) {
+	if ( arg->v == cmd_dmenu ) {
 		dmenumon[0] = '0' + selmon->num;
 	}
 	if ( fork() == 0 ) {

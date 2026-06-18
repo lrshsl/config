@@ -1,0 +1,13 @@
+
+map path to polybar.ini => '$HOME/.config/leftwm/themes/current/polybar.ini'
+map toggle polybar => ' \
+polybar-msg cmd toggle >/dev/null 2>&1 || \
+polybar -c [path to polybar.ini] mainbar &> /dev/null & \
+'
+
+|| dir in (prev, next)
+map tty [dir:ident] => '''switch-tty [is dir { 'prev' ? '-rev', }]'''
+
+|| activate in (on, off)
+map fancy mode [activate:ident] => 'fancy-mode [activate]'
+

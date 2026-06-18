@@ -10,7 +10,7 @@ map esc => 'Escape'
 map arrow up => 'Up'
 map arrow right => 'Right'
 map arrow down => 'Down'
-map arrow right => 'Right'
+map arrow left => 'Left'
 |map arrow [direction:ident] => [is direction {
 |   'up' ? 'Up',
 |   'left' ? 'Left',

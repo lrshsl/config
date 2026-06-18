@@ -1,4 +1,4 @@
-import ./keymaps
+import ./common/keymaps/*
 
 '''
 // This config has been generated. Change the leftwm_main.exr file instead.

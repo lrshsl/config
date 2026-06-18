@@ -1,4 +1,4 @@
-import ./leftwm_definitions
+import ../leftwm_definitions
 import ./defaults
 
 map path to polybar.ini => '$HOME/.config/leftwm/themes/current/polybar.ini'
@@ -63,6 +63,18 @@ map all-keybinds => [..
 	bind: alt o -> leftwm FocusWindowDown
 
    | Tag switching
+   bind: alt a -> tag 1
+   bind: alt r -> tag 2
+   bind: alt s -> tag 3
+   bind: alt t -> tag 4
+   bind: alt d -> tag 5
+
+   bind: alt q -> tag 6
+   bind: alt w -> tag 7
+   bind: alt f -> tag 8
+   bind: alt p -> tag 9
+
+
    bind: super a -> tag 1
    bind: super r -> tag 2
    bind: super s -> tag 3
