@@ -20,6 +20,8 @@ map bind: [mod] [key:ident] -> [cmd]
 map bind: [mod] [key] -> [cmd]
 => '\t{[mod], XK_[key], [cmd]},\n'
 
+map goto tag [tag] => 'view, {.ui = 1 << [tag]}'
+
 map cmd run [name:ident] => 'spawn, {.v = cmd_[name]}'
 map cmd define [name:ident] = [cmd_parts] => '''
 static const char *cmd_[name]\[\] = {
