@@ -55,6 +55,7 @@ static void tag(const Arg *arg);
 static void tagmon(const Arg *arg);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
+static void togglefullscreen(const Arg *arg);
 static void toggletag(const Arg *arg);
 static void toggleview(const Arg *arg);
 static void zoom(const Arg *arg);
@@ -1490,6 +1491,11 @@ void setfocus(Client *c) {
 		(unsigned char *)&c->win, 1
 	);
 	sendevent(c, wmatom[WMTakeFocus]);
+}
+
+void togglefullscreen(const Arg *arg) {
+   Client *c = selmon->sel;
+   setfullscreen(c, !c->isfullscreen);
 }
 
 void setfullscreen(Client *c, int fullscreen) {

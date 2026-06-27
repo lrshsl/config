@@ -1,5 +1,6 @@
+
 map set [name:ident] = [value] ([type]) =>
-   '''static const [is type { 'bool'? 'int', _? type, }] [name] = [value];'''
+   '..static const [is type { 'bool'? 'int', _? type, }] [name] = [value];..'
 
 map true => '1'
 map false => '0'
@@ -7,28 +8,46 @@ map false => '0'
 map alt => 'Mod1Mask'
 map super => 'Mod4Mask'
 
+| /usr/include/X11/keysymdef.h
+| /usr/include/X11/XF86keysym.h
 map space => 'space'
 map return => 'Return'
+map tab => 'Tab'
+map comma => 'comma'
+map period => 'period'
 
 map arrow up => 'Up'
 map arrow right => 'Right'
 map arrow down => 'Down'
 map arrow left => 'Left'
 
-map bind: [mod] [key:ident] -> [cmd]
-=> '\t{[mod], XK_[key], [cmd]},\n'
-map bind: [mod] [key] -> [cmd]
-=> '\t{[mod], XK_[key], [cmd]},\n'
+map bind: [key:ident] -> [cmd]
+=> '\t{0, [key], [cmd]},'
 
-map goto tag [tag] => 'view, {.ui = 1 << [tag]}'
+map bind: [mod] [key:ident] -> [cmd]
+=> '\t{[mod], XK_[key], [cmd]},'
+
+map bind: [mod] [key] -> [cmd]
+=> '\t{[mod], XK_[key], [cmd]},'
+
+map goto tag [n] => 'view, {.ui = 1 << [n]}'
+map move window to tag [n] => 'tag, {.ui = 1 << [n]}'
+
+map dwm [cmd:ident] => '[cmd], {0}'
+map dwm [cmd:ident] [arg] => '[cmd], {. [arg]}'
+map setlayout [layout:ident] => '..setlayout, {.v = &layouts\[[is layout {
+   'tiled'    ? '0',
+   'floating' ? '1',
+   'monocle'  ? '2',
+}]\]}..'
 
 map cmd run [name:ident] => 'spawn, {.v = cmd_[name]}'
-map cmd define [name:ident] = [cmd_parts] => '''
+map cmd define [name:ident] = [cmd_parts] => '..
 static const char *cmd_[name]\[\] = {
    [cmd_parts],
    NULL,
 };
-'''
+..'
 
 map file
    settings [settings]
@@ -37,13 +56,14 @@ map file
    define [cmds]
    keys mod = [mod:ident]
       [keybinds]
-=> '''
+=> '..
 /* See LICENSE file for copyright and license details. */
 
 #ifndef DWM_CONFIG_H
 #define DWM_CONFIG_H
 
 #include <unistd.h>
+#include <X11/XF86keysym.h>
 
 #include "dwm.h"
 
@@ -65,9 +85,9 @@ static const Rule rules\[\] = {
 
 static const Layout layouts\[\] = {
 	/* symbol     arrange function */
-	{"\[\]=", tile   }, /* first entry is default */
-	{"><>", NULL   }, /* no layout function means floating behavior */
-	{"\[M\]", monocle},
+	{"T", tile   }, /* first entry is default */
+	{"F", NULL   }, /* no layout function means floating behavior */
+	{"M", monocle},
 };
 
 /* key definitions */
@@ -89,7 +109,6 @@ static char dmenumon\[2\] =
 	"0"; /* component of dmenucmd, manipulated in spawn() */
 [cmds]
 
-/* /usr/include/X11/keysymdef.h */
 static const Key keys\[\] = {
    [keybinds]
 };
@@ -113,4 +132,4 @@ static const Button buttons\[\] = {
 };
 
 #endif /* DWM_CONFIG_H */
-'''
+..'

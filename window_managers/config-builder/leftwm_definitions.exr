@@ -6,6 +6,7 @@ map space => 'space'
 map dot => 'period'
 map comma => 'comma'
 map esc => 'Escape'
+map backspace => 'BackSpace'
 
 map arrow up => 'Up'
 map arrow right => 'Right'

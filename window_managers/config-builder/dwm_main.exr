@@ -1,26 +1,21 @@
-import ./dwm
+import ./common/utils
+import ./dwm/*
 
-map dmenu_cmd => ''
-"dmenu_run",
-   "-m",  dmenumon,
-   "-fn", dmenufont,
-   "-nb", col_gray1,
-   "-nf", col_gray3,
-   "-sb", col_cyan,
-   "-sf", col_gray4
-''
+map tag [key:ident] [n] => [..
+   bind: alt [key] -> [goto tag [calc n - 1]]
+   bind: super [n] -> [move window to tag [calc n - 1]]
+..]
 
-map tag [key:ident] [x] => [bind: alt [key] -> [goto tag [calc x - 1]]]
-
-map window [dir:ident] => ''focusstack, {.i = [
+map window [dir:ident] => '.\
+focusstack, {.i = [
    is dir {
       'next' ? '+1',
       'prev' ? '-1',
    }
-]}''
+]}.'
 
 [file
-   settings ''[..
+   settings '[..
       set borderpx = 1             ('unsigned int')
       set snap = 32                ('unsigned int')
       set showbar = [false]        ('bool')
@@ -31,7 +26,7 @@ map window [dir:ident] => ''focusstack, {.i = [
       set lockfullscreen = [true]  ('bool')
       set refreshrate = 120        ('int')
 
-      '''
+      '.
       static const char *fonts\[\] = {"monospace:size=12"};
       static const char dmenufont\[\] = "monospace:size=12";
       static const char col_gray1\[\] = "#222222";
@@ -39,15 +34,16 @@ map window [dir:ident] => ''focusstack, {.i = [
       static const char col_gray3\[\] = "#bbbbbb";
       static const char col_gray4\[\] = "#eeeeee";
       static const char col_cyan\[\] = "#005555";
-      '''
-   ..]
-   ''
-   colors ''
+      .'
+   ..]'
+
+   colors '.
       /*               fg         bg         border   */
       \[SchemeNorm\] = {col_gray3, col_gray1, col_gray2},
       \[SchemeSel\] = {col_gray4, col_cyan,  col_cyan },
-   ''
-   window rules ''
+   .'
+
+   window rules '.
       /* xprop(1):
         *	WM_CLASS(STRING) = instance, class
         *	WM_NAME(STRING) = title
@@ -66,15 +62,27 @@ map window [dir:ident] => ''focusstack, {.i = [
         .tags = 1 << 8,
         .isfloating = 0,
         .monitor = -1},
-  ''
-   define '' [..
-      cmd define dmenu = [dmenu_cmd]
+  .'
+
+   define '[..
+      cmd define dmenu = [common/utils/dmenu default]
       cmd define ghostty = '"ghostty"'
+
+      cmd define reset_monitors = '"xrandr", "--auto"'
+      cmd define connect_monitor = '"connect_monitor_x11"'
       cmd define tty_next = '"switch-tty"'
       cmd define tty_prev = '"switch-tty", "-rev"'
-   ..] ''
+      cmd define i3lock = '"i3lock", "-c", "000000"'
 
-   keys mod = [alt] ''
+      cmd define brightness_up = [common/utils/brightness up 5]
+      cmd define brightness_down = [common/utils/brightness down 5]
+
+      cmd define audio_up = [common/utils/audio up 5]
+      cmd define audio_down = [common/utils/audio down 5]
+      cmd define audio_mute = [common/utils/audio mute 'toggle']
+   ..]'
+
+   keys mod = [super] '..
       /* modifier     key        function        argument */
       [..
          bind: alt [space] -> [cmd run dmenu]
@@ -87,6 +95,33 @@ map window [dir:ident] => ''focusstack, {.i = [
          bind: alt i -> [window next]
          bind: alt e -> [window prev]
 
+         bind: alt c -> [dwm killclient]
+
+         bind: super b -> [dwm togglebar]
+         bind: alt equal -> [dwm zoom]
+
+         bind: alt m -> [dwm togglefullscreen]
+         bind: super w -> [cmd run reset_monitors]
+         bind: super c -> [cmd run connect_monitor]
+         bind: super z -> [cmd run i3lock]
+
+         bind: super r -> [dwm setmfact 'f = -0.05']
+         bind: super s -> [dwm setmfact 'f = +0.05']
+         bind: super t -> [setlayout tiled]
+         bind: super f -> [setlayout floating]
+         bind: super m -> [setlayout monocle]
+         bind: super comma -> [dwm focusmon 'i = -1']
+         bind: super period -> [dwm focusmon 'i = +1']
+
+         bind: XF86XK_MonBrightnessUp -> [cmd run brightness_up]
+         bind: XF86XK_MonBrightnessDown -> [cmd run brightness_down]
+
+         bind: XF86XK_AudioRaiseVolume -> [cmd run audio_up]
+         bind: XF86XK_AudioLowerVolume -> [cmd run audio_down]
+         bind: XF86XK_AudioMute -> [cmd run audio_mute]
+
+         bind: alt [tab] -> [dwm view]
+
          tag a 1
          tag r 2
          tag s 3
@@ -98,26 +133,15 @@ map window [dir:ident] => ''focusstack, {.i = [
          tag f 8
          tag p 9
       ..]
-      {MODKEY,        XK_b,      togglebar,      {0}               },
-      {MODKEY,        XK_r,      setmfact,       {.f = -0.05}      },
-      {MODKEY,        XK_s,      setmfact,       {.f = +0.05}      },
-      {MODKEY,        XK_equal,  zoom,           {0}               },
-      {MODKEY,        XK_Tab,    view,           {0}               },
-      {MODKEY,        XK_c,      killclient,     {0}               },
-      {MODKEY,        XK_t,      setlayout,      {.v = &layouts \[ 0 \]}},
-      {MODKEY,        XK_f,      setlayout,      {.v = &layouts \[ 1 \]}},
-      {MODKEY,        XK_m,      setlayout,      {.v = &layouts \[ 2 \]}},
       {MODKEY,        XK_q,      setlayout,      {0}               },
       {MODKEY | ShiftMask, XK_space,  togglefloating, {0}               },
       {MODKEY,        XK_0,      view,           {.ui = ~0}        },
       {MODKEY | ShiftMask, XK_0, tag,            {.ui = ~0}        },
-      {MODKEY,        XK_comma,  focusmon,       {.i = -1}         },
-      {MODKEY,        XK_period, focusmon,       {.i = +1}         },
       {MODKEY | ShiftMask, XK_comma,  tagmon,    {.i = -1}         },
       {MODKEY | ShiftMask, XK_period, tagmon,    {.i = +1}         },
       TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
          TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
             TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_q,      quit,           {0}               },
-   ''
+   ..'
 ]
 

@@ -1,5 +1,5 @@
-import ../leftwm_definitions
-import ./defaults
+import ../leftwm_definitions/*
+import ./defaults/*
 
 map path to polybar.ini => '$HOME/.config/leftwm/themes/current/polybar.ini'
 map toggle polybar => ' \
@@ -21,7 +21,7 @@ map all-keybinds => [..
    | Terminal
    bind: alt [ret] -> [terminal main]
    bind: super [ret] -> [terminal secondary]
-   bind: alt t -> [terminal dropdown]
+   bind: alt [backspace] -> [terminal dropdown]
 
    [mk binding:
       mods: [translate 'meh'],
