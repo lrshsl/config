@@ -192,6 +192,7 @@ void applyrules(Client *c) {
 
 	/* rule matching */
 	c->isfloating = 0;
+	c->isfullscreen = 0;
 	c->tags = 0;
 	XGetClassHint(dpy, c->win, &ch);
 	class = ch.res_class ? ch.res_class : broken;
@@ -203,6 +204,7 @@ void applyrules(Client *c) {
 		     (!r->class || strstr(class, r->class)) &&
 		     (!r->instance || strstr(instance, r->instance)) ) {
 			c->isfloating = r->isfloating;
+			c->isfullscreen = r->isfullscreen;
 			c->tags |= r->tags;
 			for ( m = mons; m && m->num != r->monitor; m = m->next )
 				;
@@ -1062,6 +1064,9 @@ void manage(Window w, XWindowAttributes *wa) {
 	}
 	c->mon->sel = c;
 	arrange(c->mon);
+   if ( c->isfullscreen ) {
+      setfullscreen(c, 1);
+   }
 	XMapWindow(dpy, c->win);
 	focus(NULL);
 }

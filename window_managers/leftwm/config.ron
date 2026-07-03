@@ -117,7 +117,7 @@
    ( command: Execute,
       value: " xfce4-terminal --drop-down --title 'dropdown-scratch-terminal' ",
       modifier: [ "Mod1" ],
-      key: "t"
+      key: "BackSpace"
    ),
 
 
@@ -258,6 +258,69 @@
       value: "",
       modifier: [ "Mod1" ],
       key: "o"
+   ),
+
+
+   ( command: GotoTag,
+      value: "1",
+      modifier: [ "Mod1" ],
+      key: "a"
+   ),
+
+
+   ( command: GotoTag,
+      value: "2",
+      modifier: [ "Mod1" ],
+      key: "r"
+   ),
+
+
+   ( command: GotoTag,
+      value: "3",
+      modifier: [ "Mod1" ],
+      key: "s"
+   ),
+
+
+   ( command: GotoTag,
+      value: "4",
+      modifier: [ "Mod1" ],
+      key: "t"
+   ),
+
+
+   ( command: GotoTag,
+      value: "5",
+      modifier: [ "Mod1" ],
+      key: "d"
+   ),
+
+
+   ( command: GotoTag,
+      value: "6",
+      modifier: [ "Mod1" ],
+      key: "q"
+   ),
+
+
+   ( command: GotoTag,
+      value: "7",
+      modifier: [ "Mod1" ],
+      key: "w"
+   ),
+
+
+   ( command: GotoTag,
+      value: "8",
+      modifier: [ "Mod1" ],
+      key: "f"
+   ),
+
+
+   ( command: GotoTag,
+      value: "9",
+      modifier: [ "Mod1" ],
+      key: "p"
    ),
 
 

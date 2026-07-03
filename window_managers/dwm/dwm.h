@@ -132,6 +132,7 @@ typedef struct {
 	const char *title;
 	unsigned int tags;
 	int isfloating;
+	int isfullscreen;
 	int monitor;
 } Rule;
 

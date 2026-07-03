@@ -54,6 +54,15 @@ focusstack, {.i = [
         .title = NULL,
         .tags = 0,
         .isfloating = 1,
+        .isfullscreen = 0,
+        .monitor = -1},
+
+      {.class = "ghostty",
+        .instance = NULL,
+        .title = NULL,
+        .tags = 0,
+        .isfloating = 0,
+        .isfullscreen = 1,
         .monitor = -1},
 
       {.class = "Firefox",
@@ -61,6 +70,7 @@ focusstack, {.i = [
         .title = NULL,
         .tags = 1 << 8,
         .isfloating = 0,
+        .isfullscreen = 0,
         .monitor = -1},
   .'
 
