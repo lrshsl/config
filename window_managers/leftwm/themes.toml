@@ -21,7 +21,6 @@ current = false
 
 [[repos.themes]]
 name = "Ascent"
-directory = "/home/lnx/.config/leftwm/themes/Ascent"
 repository = "https://gitlab.com/mWalrus/ascent"
 commit = "*"
 version = "1.0.0"
@@ -247,7 +246,6 @@ current = false
 
 [[repos.themes]]
 name = "Blood-Moon"
-directory = "/home/lnx/.config/leftwm/themes/Blood-Moon"
 repository = "https://github.com/zawesomekid/Blood-Moon-leftwm-theme"
 commit = "*"
 version = "0.0.1"
@@ -256,12 +254,11 @@ current = false
 
 [[repos.themes]]
 name = "Late-Night"
-directory = "/home/lnx/.config/leftwm/themes/Late-Night"
 repository = "https://github.com/JacoMalan1/LateNight"
 commit = "*"
 version = "0.0.2"
 leftwm_versions = ">0.3.0"
-current = true
+current = false
 
 [[repos]]
 url = "localhost"
@@ -273,4 +270,4 @@ name = "cyan-glow"
 directory = "/home/lnx/.config/leftwm/themes/cyan-glow"
 version = "0.0.0"
 leftwm_versions = "*"
-current = false
+current = true
