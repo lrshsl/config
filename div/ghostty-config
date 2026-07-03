@@ -1,4 +1,3 @@
-
 background = #000000
 
 font-family = ""
@@ -7,6 +6,8 @@ font-size = 20
 
 cursor-style = bar
 cursor-style-blink = false
+
+mouse-scroll-multiplier = 2
 
 shell-integration = fish
 shell-integration-features = no-cursor
@@ -20,16 +21,27 @@ window-inherit-working-directory = false
 tab-inherit-working-directory = true
 
 
-# <Meta-h> => 'tldr' [[cmd]]<CR>
-keybind = alt+h=text:\x01man \x0d
+# <Meta-H> => tldr [[cmd]]<CR>
 keybind = ctrl+h=text:\x01tldr \x0d
+keybind = ctrl+shift+h=text:\x01man \x0d
+
+# <Meta-'> => echo '[[cmd]]'
+keybind = alt+'=text:'\x01echo '\x05
+
+# <Ctrl-Shift-L> => copy (unfinished) command to system clipboard
+keybind = ctrl+shift+l=text:'|copy\x01echo -n '\x0d
 
 keybind = ctrl+t>n=new_tab
 keybind = ctrl+t>ctrl+o=next_tab
 keybind = ctrl+t>ctrl+n=previous_tab
+keybind = ctrl+t>t=toggle_tab_overview
+keybind = ctrl+t>r=prompt_tab_title
 
 keybind = ctrl+s>n=new_split:auto
 keybind = ctrl+s>ctrl+o=goto_split:next
 keybind = ctrl+s>ctrl+n=goto_split:previous
+
+keybind = ctrl+shift+n=unbind
+keybind = ctrl+shift+e=unbind
 
 # vim: ft=toml
