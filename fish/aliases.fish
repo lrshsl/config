@@ -100,28 +100,35 @@ function lstree
 		or tree -CL 1 2> /dev/null
 		or ls -l
       or echo 'No ls?!'
-	else
-      # $1 : directory or ''
-      if test -d $argv[1] -o -z $argv[1]
-         eza -TL 1 $argv
-         or tree -CL 1 $argv
-         or ls -l $argv
+      return
+   end
 
-         or echo $usage
+   # $1 : directory or ''
+   if test -d $argv[1] -o -z $argv[1]
+      eza -TL 1 $argv
+      or tree -CL 1 $argv
+      or ls -l $argv
 
-      # $1 : file
-      elif test -f $argv[1]
-         bat $argv
-         or cat $argv
+      or echo $usage
 
-      # $1 : number
-      else
-         eza -TL $argv
-         or tree -CL $argv
-         or ls -l $argv
+   # $1 : file
+   else if test -f $argv[1]
+      # Contents
+      bat $argv
+      or cat $argv
 
-         or echo $usage
-      end
+      # File info
+      file $argv[1]
+      eza -lh $argv[1]
+      or ls -lh $argv[1]
+
+   # $1 : number
+   else
+      eza -TL $argv
+      or tree -CL $argv
+      or ls -l $argv
+
+      or echo $usage
 	end
 end
 
