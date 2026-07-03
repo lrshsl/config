@@ -1,9 +1,6 @@
 [submodule "nvim-config"]
-	path = nvim-config
+	path = editor/nvim-config
 	url = https://github.com/lrshsl/nvim-config
-[submodule "vim_templates"]
-	path = vim_templates
-	url = https://github.com/lrshsl/vim_templates
 [submodule "nix-cfg"]
 	path = nix-cfg
 	url = git@github.com:lrshsl/nix-cfg
