@@ -78,6 +78,8 @@ focusstack, {.i = [
       cmd define dmenu = [common/utils/dmenu default]
       cmd define ghostty = '"ghostty"'
 
+      cmd define xkill = '"xkill"'
+
       cmd define reset_monitors = '"xrandr", "--auto"'
       cmd define connect_monitor = '"connect_monitor_x11"'
       cmd define tty_next = '"switch-tty"'
@@ -114,6 +116,7 @@ focusstack, {.i = [
          bind: super w -> [cmd run reset_monitors]
          bind: super c -> [cmd run connect_monitor]
          bind: super z -> [cmd run i3lock]
+         bind: super [esc] -> [cmd run xkill]
 
          bind: super r -> [dwm setmfact 'f = -0.05']
          bind: super s -> [dwm setmfact 'f = +0.05']

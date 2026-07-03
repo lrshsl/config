@@ -35,6 +35,11 @@ map all-keybinds => [..
    bind: alt Right -> [tty next]
    bind: alt Left -> [tty prev]
 
+   | Quit
+   bind: super shift q -> "loginctl kill-session $XDG_SESSION_ID"
+   bind: super z -> "i3lock -c 000000"
+   bind: super shift [ret] -> leftwm SoftReload
+
    | Toggle polybar
    bind: super b -> [toggle polybar]
 
@@ -73,18 +78,6 @@ map all-keybinds => [..
    bind: alt w -> tag 7
    bind: alt f -> tag 8
    bind: alt p -> tag 9
-
-
-   bind: super a -> tag 1
-   bind: super r -> tag 2
-   bind: super s -> tag 3
-   bind: super t -> tag 4
-   bind: super d -> tag 5
-
-   bind: super q -> tag 6
-   bind: super w -> tag 7
-   bind: super f -> tag 8
-   bind: super p -> tag 9
 
 	bind: super n -> leftwm FocusPreviousTag
 	bind: super o -> leftwm FocusNextTag

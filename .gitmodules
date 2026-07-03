@@ -1,6 +1,9 @@
 [submodule "nvim-config"]
 	path = editor/nvim-config
-	url = https://github.com/lrshsl/nvim-config
+	url = git@github.com:lrshsl/nvim-config
 [submodule "nix-cfg"]
 	path = nix-cfg
 	url = git@github.com:lrshsl/nix-cfg
+[submodule "editor/nvim-config"]
+	path = editor/nvim-config
+	url = git@github.com:lrshsl/nvim-config

@@ -15,6 +15,7 @@ map return => 'Return'
 map tab => 'Tab'
 map comma => 'comma'
 map period => 'period'
+map esc => 'Escape'
 
 map arrow up => 'Up'
 map arrow right => 'Right'
