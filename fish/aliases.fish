@@ -3,39 +3,29 @@ if not status is-interactive
 end
 
 # Dependencies:
-# `exa ripgrep fd dust zoxide`
+# `eza zoxide neovim`
 #
 # Optional:
-# `most ytop tealdeer`
-
-
-### Terminal ###
-function clear_screen
-	clear && echo
-end
+# `tealdeer xclip rg fd git just make cargo zellij jujutsu`
 
 
 # Terminal itself
-abbr c            clear_screen
-abbr q            exit
-abbr rbt          reboot
 abbr po           poweroff
 
 abbr n            nvim
-abbr nv           neovide 
 
 abbr zl           'zellij'
 abbr za           'zellij a'
 abbr zn           'zellij -s'
 
+# Build & run
+abbr r            just run
+abbr rt           just test
+abbr rb           just build
 abbr m            make
 abbr mr           make run
 abbr ca           cargo
 abbr cr           cargo run --
-abbr ct           cargo test --all
-abbr zr           zig build run --
-abbr nr           nimble run --
-abbr or           odin run .
 
 ### Pacman ###
 abbr get          'sudo pacman -S'
@@ -50,10 +40,13 @@ abbr --set-cursor   gm      'git commit -m "%"'
 abbr --set-cursor   gam     'git commit -am "%"'
 abbr gp                     git push
 abbr gpu                    git pull
-abbr gf                     git fetch
+abbr gf                     git fetch --all
 abbr gs                     git status
 abbr gst                    git stash
 abbr gd                     git diff
+abbr gl                     git logtree
+
+abbr nn                     jj
 
 function set-git-id
 	if test (count $argv) -ne 2
@@ -63,10 +56,6 @@ function set-git-id
 	git config user.name $argv[1]
 	git config user.email $argv[2]
 end
-
-abbr gl                     git logtree
-abbr gls                    git logtree
-abbr glo                    git log
 
 ### Fish ###
 abbr fn           'funced -e nvim -s'
@@ -78,7 +67,7 @@ abbr !! --position anywhere --function last_history_item
 abbr -p=anywhere --set-cursor mm '~/%'
 
 
-### Remind (and force) me to use the good (and rusty) tools ###
+### Tools
 #abbr grep        rg
 #abbr find        fd
 #abbr less        most
@@ -86,10 +75,10 @@ abbr -p=anywhere --set-cursor mm '~/%'
 #abbr htop        ytop
 #abbr du          dust
 #abbr ncdu        dust
+#abbr dust         'br -w'
 #abbr man         tldr
 # alias z         zoxide
 abbr cd           z
-abbr dust         'br -w'
 abbr cat          bat
 
 abbr rg           'rg -.'
@@ -105,18 +94,34 @@ abbr fda          'fd -H --no-ignore'
 alias eza 'eza --icons'
 
 function lstree
+   set -l usage 'lstree [LEVEL] [PATH..]'
 	if test (count $argv) = 0
 		eza -TL 1 2> /dev/null
 		or tree -CL 1 2> /dev/null
 		or ls -l
+      or echo 'No ls?!'
 	else
-		eza -TL $argv 2> /dev/null
-		or eza -TL 1 $argv
+      # $1 : directory or ''
+      if test -d $argv[1] -o -z $argv[1]
+         eza -TL 1 $argv
+         or tree -CL 1 $argv
+         or ls -l $argv
 
-		or tree -CL $argv 2> /dev/null
-		or tree -CL 1 $argv
+         or echo $usage
 
-		or ls -l $argv
+      # $1 : file
+      elif test -f $argv[1]
+         bat $argv
+         or cat $argv
+
+      # $1 : number
+      else
+         eza -TL $argv
+         or tree -CL $argv
+         or ls -l $argv
+
+         or echo $usage
+      end
 	end
 end
 
