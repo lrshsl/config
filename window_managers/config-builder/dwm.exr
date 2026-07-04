@@ -5,31 +5,43 @@ map set [name:ident] = [value] ([type]) =>
 map true => '1'
 map false => '0'
 
+| /usr/include/X11/X.h:221
+map shift => 'ShiftMask'
+map lock => 'LockMask'
+map control => 'ControlMask'
 map alt => 'Mod1Mask'
+map mod2 => 'Mod2Mask'
+map mod3 => 'Mod3Mask'
 map super => 'Mod4Mask'
+map mod5 => 'Mod5Mask'
 
 | /usr/include/X11/keysymdef.h
 | /usr/include/X11/XF86keysym.h
-map space => 'space'
-map return => 'Return'
-map tab => 'Tab'
-map comma => 'comma'
-map period => 'period'
-map esc => 'Escape'
+map translate [key] => [is key {
+   'space' ? 'space',
+   'return' ? 'Return',
+   'tab' ? 'Tab',
+   'comma' ? 'comma',
+   'period' ? 'period',
+   'esc' ? 'Escape',
 
-map arrow up => 'Up'
-map arrow right => 'Right'
-map arrow down => 'Down'
-map arrow left => 'Left'
+	'up' ? 'Up',
+	'right' ? 'Right',
+	'down' ? 'Down',
+	'left' ? 'Left',
+
+   _ ? '[key]'
+}]
+
 
 map bind: [key:ident] -> [cmd]
 => '\t{0, [key], [cmd]},'
 
 map bind: [mod] [key:ident] -> [cmd]
-=> '\t{[mod], XK_[key], [cmd]},'
+=> '\t{[mod], XK_[translate key], [cmd]},'
 
-map bind: [mod] [key] -> [cmd]
-=> '\t{[mod], XK_[key], [cmd]},'
+|map bind: [mod] [key] -> [cmd]
+|=> '\t{[mod], XK_[key], [cmd]},'
 
 map goto tag [n] => 'view, {.ui = 1 << [n]}'
 map move window to tag [n] => 'tag, {.ui = 1 << [n]}'

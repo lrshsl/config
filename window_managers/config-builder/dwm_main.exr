@@ -2,7 +2,7 @@ import ./common/utils
 import ./dwm/*
 
 map tag [key:ident] [n] => [..
-   bind: alt [key] -> [goto tag [calc n - 1]]
+   bind: mod5 [key] -> [goto tag [calc n - 1]]
    bind: super [n] -> [move window to tag [calc n - 1]]
 ..]
 
@@ -77,6 +77,7 @@ focusstack, {.i = [
    define '[..
       cmd define dmenu = [common/utils/dmenu default]
       cmd define ghostty = '"ghostty"'
+      cmd define xfce4_terminal = '"xfce4-terminal"'
 
       cmd define xkill = '"xkill"'
 
@@ -97,15 +98,16 @@ focusstack, {.i = [
    keys mod = [super] '..
       /* modifier     key        function        argument */
       [..
-         bind: alt [space] -> [cmd run dmenu]
-         bind: alt [return] -> [cmd run ghostty]
-         bind: alt [arrow right] -> [cmd run tty_next]
-         bind: alt [arrow left] -> [cmd run tty_prev]
+         bind: alt space -> [cmd run dmenu]
+         bind: alt return -> [cmd run ghostty]
+         bind: super return -> [cmd run xfce4_terminal]
+         bind: alt right -> [cmd run tty_next]
+         bind: alt left -> [cmd run tty_prev]
 
-         bind: alt o -> [window next]
          bind: alt n -> [window prev]
          bind: alt i -> [window next]
-         bind: alt e -> [window prev]
+         |bind: alt e -> [window prev]
+         |bind: alt o -> [window next]
 
          bind: alt c -> [dwm killclient]
 
@@ -116,7 +118,7 @@ focusstack, {.i = [
          bind: super w -> [cmd run reset_monitors]
          bind: super c -> [cmd run connect_monitor]
          bind: super z -> [cmd run i3lock]
-         bind: super [esc] -> [cmd run xkill]
+         bind: super esc -> [cmd run xkill]
 
          bind: super r -> [dwm setmfact 'f = -0.05']
          bind: super s -> [dwm setmfact 'f = +0.05']
@@ -133,18 +135,18 @@ focusstack, {.i = [
          bind: XF86XK_AudioLowerVolume -> [cmd run audio_down]
          bind: XF86XK_AudioMute -> [cmd run audio_mute]
 
-         bind: alt [tab] -> [dwm view]
+         bind: alt tab -> [dwm view]
 
          tag a 1
          tag r 2
          tag s 3
          tag t 4
-         tag d 5
 
-         tag q 6
-         tag w 7
-         tag f 8
-         tag p 9
+         tag q 5
+         tag w 6
+         tag f 7
+         tag p 8
+         tag g 9
       ..]
       {MODKEY,        XK_q,      setlayout,      {0}               },
       {MODKEY | ShiftMask, XK_space,  togglefloating, {0}               },
