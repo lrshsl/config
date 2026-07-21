@@ -62,7 +62,6 @@ static void zoom(const Arg *arg);
 static void view(const Arg *arg);
 static void focusmon(const Arg *arg);
 static void focusstack(const Arg *arg);
-static void incnmaster(const Arg *arg);
 static void killclient(const Arg *arg);
 
 static void applyrules(Client *c);
@@ -946,11 +945,6 @@ void grabkeys(void) {
 		}
 		XFree(syms);
 	}
-}
-
-void incnmaster(const Arg *arg) {
-	selmon->nmaster = MAX(selmon->nmaster + arg->i, 0);
-	arrange(selmon);
 }
 
 #ifdef XINERAMA
