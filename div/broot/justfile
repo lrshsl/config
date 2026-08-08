@@ -1,0 +1,6 @@
+check:
+   expandr expand ./main.exr > out/verbs.toml
+
+install: check
+   cp ./out/* ~/.config/broot/
+

@@ -1,0 +1,60 @@
+map action([filter:ident?])
+   [long:ident] / [short:ident] [args:ident*] -> [action:ident] [cmd]
+=> '..
+\[\[verbs\]\]
+invocation = "[long] [mkarg [*args]]"
+[shortcut short]
+[translate action [action]] = "[cmd]"
+leave_broot = false
+[apply-to filter]
+..'
+
+| Optional short form
+map action([filter:ident?])
+   [long:ident] [args?] -> [action:ident] [cmd]
+=> [
+action([filter])
+   [long] / '' args -> [action] cmd
+]
+
+map translate action [action:ident] => [is action {
+   'sh' ? 'external',
+   'run' ? 'internal',
+   'cmd_list' ? 'cmd',
+}]
+
+map show [xs:ident+] => 'default_flags = "[mkflag [*xs]]"'
+map mkflag [x] [xs] => '[mkflag x][mkflag [*xs]]'
+map mkflag [x] => [is x {
+   'hidden' ? 'h',
+   'git' ? 'g',
+   'date' ? 'd',
+}]
+
+map mkarg [arg:ident] [args:ident+] => '[mkarg [arg]] [mkarg [*args]]'
+map mkarg [arg:ident] => '{[arg]}'
+map mkarg => ''
+
+map shortcut => ''
+map shortcut [short] => 'shortcut = "[short]"'
+map apply-to => ''
+map apply-to [filter] => [is filter {
+   '' ? '',
+   _ ? 'apply_to = "[filter]"',
+}]
+
+map bind
+   [keys] -> [action:ident] [cmd]
+=> '..\
+\[\[verbs\]\]
+key = "[keys]"
+[is action {
+   'sh'? 'external = "[cmd]"',
+   'run'? 'execution = ":[cmd]"',
+   'builtin'? 'internal = ":[cmd]"',
+   'cmd_list'? 'cmd = "[cmd]"',
+
+   'mkpanel'? 'execution = ":![cmd]"',
+]
+..'
+

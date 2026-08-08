@@ -1,0 +1,47 @@
+import ./broot/*
+
+[..
+   'default_flags = "gh"'
+   'cols_order = \[
+      "mark",
+      "git",
+      "branch",
+      "permission",
+      "date",
+      "size",
+      "count",
+      "name",
+   \]'
+
+   [action(text_file)
+      edit / e -> sh "nvim +{line} {file}"]
+
+   [action(text_file)
+      git_diff_inline / gdi -> sh 'git diff --color-words {file}']
+
+   [action(text_file)
+      git_diff / gd -> sh 'git difftool -y {file}']
+
+   [action() file_info / fi -> cmd_list ':perm;:dates;:sizes'] | (git) perm date size
+
+   | Shortcuts
+   bind 'ctrl-p' -> builtin 'toggle_preview'
+   bind 'ctrl-g' -> builtin 'toggle_git_status'
+   bind 'ctrl-f' -> run 'file_info'
+   |bind 'ctrl-d' -> mkpanel 'git_diff_inline'
+
+   | Multi panel
+   bind 'ctrl-o' -> builtin 'panel_right'
+   bind 'ctrl-n' -> builtin 'panel_left_no_open'
+
+   bind 'ctrl-shift-i' -> sh 'cp -r {file} {other-panel-directory}'
+   bind 'ctrl-shift-h' -> sh 'cp -r {file} {other-panel-directory}'
+   bind 'ctrl-shift-h' -> sh 'mv -r {file} {other-panel-directory}'
+
+   | Navigation
+   bind 'ctrl-n' -> builtin 'line_down'
+   bind 'ctrl-e' -> builtin 'line_up'
+   bind 'ctrl-u' -> builtin 'page_up'
+   bind 'ctrl-y' -> builtin 'page_down'
+..]
+

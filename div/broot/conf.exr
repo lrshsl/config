@@ -1,0 +1,19 @@
+import ./broot/*
+
+map common verbs => [..
+   action(text_file) edit / e -> exec 'nvim +{line} {file}'
+
+   action() touch '{new_file}' -> exec 'touch {directory}/{new_file}'
+..]
+
+[mode 'review'
+   # Settings
+   [show hidden]
+
+   # Verbs
+   [common verbs]
+
+   # Keybinds
+   [common keybinds]
+]
+
