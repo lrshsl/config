@@ -1,0 +1,6 @@
+
+check:
+   expandr expand main.exr
+
+install:
+   expandr expand main.exr > ~/.config/lazygit/config.yml

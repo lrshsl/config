@@ -1,0 +1,16 @@
+
+'..
+git:
+   diffRenderers:
+      - command: delta --dark --paging=never
+
+keybinding:
+   universal:
+      prevItem: \[<up>, <ctrl+e>\]
+      nextItem: \[<up>, <ctrl+n>\]
+      scrollLeft: H
+      scrollRight: I
+      togglePanel: <tab>
+      prevPage: <ctrl+u>
+      nextPage: <ctrl+y>
+..'
