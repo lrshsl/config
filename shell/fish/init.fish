@@ -10,5 +10,9 @@ fish_add_path /usr/lib/jvm/default/bin/
 
 zoxide init fish | source
 
-#echo -e '\033[?17;0;120c' # White block cursor for tty
-#setfont ter-u18n.psf.gz
+if string match -q '/dev/tty*' (tty)
+   echo -e '\033[?17;0;120c' # White block cursor for tty
+   # setfont ter-u18n.psf.gz
+   setfont sun12x22.psfu.gz
+   # setfont solar24x32 -h32
+end
