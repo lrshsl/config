@@ -7,6 +7,8 @@ font-size = 20
 cursor-style = bar
 cursor-style-blink = false
 
+copy-on-select = true
+
 mouse-scroll-multiplier = 2
 
 shell-integration = fish
@@ -21,8 +23,9 @@ window-inherit-working-directory = false
 tab-inherit-working-directory = true
 
 
-# <Meta-H> => tldr [[cmd]]<CR>
-keybind = ctrl+h=text:\x01tldr \x0d
+# <Meta-Ctrl-h> => tldr [[cmd]]<CR>
+# <Meta-Shift-h> => man [[cmd]]<CR>
+keybind = ctrl+alt+h=text:\x01tldr \x0d
 keybind = ctrl+shift+h=text:\x01man \x0d
 
 # <Meta-'> => echo '[[cmd]]'
@@ -41,6 +44,8 @@ keybind = ctrl+s>n=new_split:auto
 keybind = ctrl+s>ctrl+o=goto_split:next
 keybind = ctrl+s>ctrl+n=goto_split:previous
 
+keybind = unconsumed:alt+n=ignore
+keybind = unconsumed:alt+o=ignore
 keybind = ctrl+shift+n=unbind
 keybind = ctrl+shift+e=unbind
 
