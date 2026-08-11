@@ -42,9 +42,10 @@ abbr gpu                    git pull
 abbr gf                     git fetch --all
 abbr gs                     git status
 abbr gst                    git stash
-abbr gd                     git diff --color-words
+abbr gd                     git diff
 abbr gl                     git logtree
-abbr gg                     'br --conf ~/.config/broot/git-diff-conf.toml --git-status'
+abbr gg                     'br --git-status'
+abbr g.                     lazygit
 
 abbr nn                     jj
 abbr --set-cursor   nnm     'jj desc -m "%"'
