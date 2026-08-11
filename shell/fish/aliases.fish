@@ -29,7 +29,6 @@ abbr cr           cargo run --
 
 ### Pacman ###
 abbr get          'sudo pacman -S'
-abbr upd          'sudo pacman -Syyu --noconfirm'
 abbr rem          'sudo pacman -Rns'
 
 ### Git ###
@@ -43,10 +42,12 @@ abbr gpu                    git pull
 abbr gf                     git fetch --all
 abbr gs                     git status
 abbr gst                    git stash
-abbr gd                     git diff
+abbr gd                     git diff --color-words
 abbr gl                     git logtree
+abbr gg                     'br --conf ~/.config/broot/git-diff-conf.toml --git-status'
 
 abbr nn                     jj
+abbr --set-cursor   nnm     'jj desc -m "%"'
 
 function set-git-id
 	if test (count $argv) -ne 2
