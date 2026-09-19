@@ -68,16 +68,16 @@ map all-keybinds => [..
 	bind: alt o -> leftwm FocusWindowDown
 
    | Tag switching
-   bind: alt a -> tag 1
-   bind: alt r -> tag 2
-   bind: alt s -> tag 3
-   bind: alt t -> tag 4
-   bind: alt d -> tag 5
+   bind: ralt a -> tag 1
+   bind: ralt r -> tag 2
+   bind: ralt s -> tag 3
+   bind: ralt t -> tag 4
 
-   bind: alt q -> tag 6
-   bind: alt w -> tag 7
-   bind: alt f -> tag 8
-   bind: alt p -> tag 9
+   bind: ralt q -> tag 5
+   bind: ralt w -> tag 6
+   bind: ralt f -> tag 7
+   bind: ralt p -> tag 8
+   bind: ralt g -> tag 9
 
 	bind: super n -> leftwm FocusPreviousTag
 	bind: super o -> leftwm FocusNextTag

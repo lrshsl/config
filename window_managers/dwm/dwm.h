@@ -87,6 +87,7 @@ struct Client {
 	unsigned int neverfocus : 1;
 	unsigned int oldstate : 1;
 	unsigned int isfullscreen : 1;
+	unsigned int wasautoborderless : 1;
 	Client *next;
 	Client *snext;
 	Monitor *mon;

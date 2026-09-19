@@ -1,6 +1,27 @@
 
+map set [name:ident] = [value] (color) =>
+   '..static const char [name]\[\] = [__stringify value];..'
+
+map set [name:ident] = [value] ([type] array) =>
+   '..static const [is type { 'bool'? 'int', _? type, }] [name]\[\] = [__stringify value];..'
+
 map set [name:ident] = [value] ([type]) =>
-   '..static const [is type { 'bool'? 'int', _? type, }] [name] = [value];..'
+   '..static const [is type { 'bool'? 'int', _? type, }] [name] = [__stringify value];..'
+
+map rule class == [class]: [mode:ident] => [
+   rule class == [class]: [mode], tag = 0
+]
+map rule class == [class]: [mode:ident], tag = [tagn] => '..
+{
+   .class = "[class]",
+   .instance = NULL,
+   .title = NULL,
+   .tags = [__stringify tagn] << 8,
+   .isfloating = [is mode { 'float' ? '1', _ ? '0', }],
+   .isfullscreen = [is mode { 'fullscreen' ? '1', _ ? '0', }],
+   .monitor = -1
+},
+..'
 
 map true => '1'
 map false => '0'
@@ -9,11 +30,10 @@ map false => '0'
 map shift => 'ShiftMask'
 map lock => 'LockMask'
 map control => 'ControlMask'
-map alt => 'Mod1Mask'
-map mod2 => 'Mod2Mask'
-map mod3 => 'Mod3Mask'
-map super => 'Mod4Mask'
-map mod5 => 'Mod5Mask'
+map alt => [mod 1]
+map ralt => [mod 5]
+map super => [mod 4]
+map mod [n] => 'Mod[__stringify n]Mask'
 
 | /usr/include/X11/keysymdef.h
 | /usr/include/X11/XF86keysym.h
@@ -37,14 +57,17 @@ map translate [key] => [is key {
 map bind: [key:ident] -> [cmd]
 => '\t{0, [key], [cmd]},'
 
+map bind: [mod] [mod2] [key:ident] -> [cmd]
+=> '\t{[mod] | [mod2], XK_[translate key], [cmd]},'
+
 map bind: [mod] [key:ident] -> [cmd]
 => '\t{[mod], XK_[translate key], [cmd]},'
 
 |map bind: [mod] [key] -> [cmd]
-|=> '\t{[mod], XK_[key], [cmd]},'
+|=> '\t{[mod], XK_[translate [__stringify key]], [cmd]},'
 
-map goto tag [n] => 'view, {.ui = 1 << [n]}'
-map move window to tag [n] => 'tag, {.ui = 1 << [n]}'
+map goto tag [n] => 'view, {.ui = 1 << [__stringify n]}'
+map move window to tag [n] => 'tag, {.ui = 1 << [__stringify n]}'
 
 map dwm [cmd:ident] => '[cmd], {0}'
 map dwm [cmd:ident] [arg] => '[cmd], {. [arg]}'
@@ -67,8 +90,7 @@ map file
    colors [colors]
    window rules [rules]
    define [cmds]
-   keys mod = [mod:ident]
-      [keybinds]
+   keys [keybinds]
 => '..
 /* See LICENSE file for copyright and license details. */
 
@@ -103,20 +125,6 @@ static const Layout layouts\[\] = {
 	{"M", monocle},
 };
 
-/* key definitions */
-#define MODKEY [mod]
-#define TAGKEYS(KEY, TAG)                                                      \
-	{MODKEY, KEY, view, {.ui = 1 << TAG}},                                     \
-		{MODKEY | ControlMask, KEY, toggleview, {.ui = 1 << TAG}},             \
-		{MODKEY | ShiftMask, KEY, tag, {.ui = 1 << TAG}},                      \
-		{MODKEY | ControlMask | ShiftMask, KEY, toggletag, {.ui = 1 << TAG}},
-
-/* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd)                                                             \
-	{                                                                          \
-		.v = (const char *\[\]) { "/bin/sh", "-c", cmd, NULL }                   \
-	}
-
 /* commands */
 static char dmenumon\[2\] =
 	"0"; /* component of dmenucmd, manipulated in spawn() */
@@ -135,13 +143,13 @@ static const Button buttons\[\] = {
 	{ClkLtSymbol,   0,      Button3, setlayout,      {.v = &layouts\[2\]}},
 	{ClkWinTitle,   0,      Button2, zoom,           {0}               },
 	//{ClkStatusText, 0,      Button2, spawn,          {.v = termcmd}    },
-	{ClkClientWin,  MODKEY, Button1, movemouse,      {0}               },
-	{ClkClientWin,  MODKEY, Button2, togglefloating, {0}               },
-	{ClkClientWin,  MODKEY, Button3, resizemouse,    {0}               },
+	{ClkClientWin,  [super], Button1, movemouse,      {0}               },
+	{ClkClientWin,  [super], Button2, togglefloating, {0}               },
+	{ClkClientWin,  [super], Button3, resizemouse,    {0}               },
 	{ClkTagBar,     0,      Button1, view,           {0}               },
 	{ClkTagBar,     0,      Button3, toggleview,     {0}               },
-	{ClkTagBar,     MODKEY, Button1, tag,            {0}               },
-	{ClkTagBar,     MODKEY, Button3, toggletag,      {0}               },
+	{ClkTagBar,     [super], Button1, tag,            {0}               },
+	{ClkTagBar,     [super], Button3, toggletag,      {0}               },
 };
 
 #endif /* DWM_CONFIG_H */

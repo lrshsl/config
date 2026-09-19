@@ -2,8 +2,8 @@ import ./common/utils
 import ./dwm/*
 
 map tag [key:ident] [n] => [..
-   bind: mod5 [key] -> [goto tag [calc n - 1]]
-   bind: super [n] -> [move window to tag [calc n - 1]]
+   bind: ralt [key] -> [goto tag [calc n - 1]]
+   bind: ralt shift [key] -> [move window to tag [calc n - 1]]
 ..]
 
 map window [dir:ident] => '.\
@@ -25,16 +25,13 @@ focusstack, {.i = [
       set resizehints = [true]     ('bool')
       set lockfullscreen = [true]  ('bool')
       set refreshrate = 120        ('int')
-
-      '.
-      static const char *fonts\[\] = {"monospace:size=12"};
-      static const char dmenufont\[\] = "monospace:size=12";
-      static const char col_gray1\[\] = "#222222";
-      static const char col_gray2\[\] = "#444444";
-      static const char col_gray3\[\] = "#bbbbbb";
-      static const char col_gray4\[\] = "#eeeeee";
-      static const char col_cyan\[\] = "#005555";
-      .'
+      set fonts = '{"monospace:size=12"}' ('char*' array)
+      set dmenufont = '"monospace:size=12"' ('char' array)
+      set col_gray1 = '"#222222"' (color)
+      set col_gray2 = '"#444444"' (color)
+      set col_gray3 = '"#bbbbbb"' (color)
+      set col_gray4 = '"#eeeeee"' (color)
+      set col_cyan  = '"#005555"' (color)
    ..]'
 
    colors '.
@@ -44,70 +41,49 @@ focusstack, {.i = [
    .'
 
    window rules '.
-      /* xprop(1):
-        *	WM_CLASS(STRING) = instance, class
-        *	WM_NAME(STRING) = title
-        */
-      /* class      instance    title       tags mask     isfloating   monitor */
-      {.class = "Gimp",
-        .instance = NULL,
-        .title = NULL,
-        .tags = 0,
-        .isfloating = 1,
-        .isfullscreen = 0,
-        .monitor = -1},
-
-      {.class = "ghostty",
-        .instance = NULL,
-        .title = NULL,
-        .tags = 0,
-        .isfloating = 0,
-        .isfullscreen = 1,
-        .monitor = -1},
-
-      {.class = "Firefox",
-        .instance = NULL,
-        .title = NULL,
-        .tags = 1 << 8,
-        .isfloating = 0,
-        .isfullscreen = 0,
-        .monitor = -1},
+      [[..
+            rule class == 'Gimp': float
+            rule class == 'Ghostty': fullscreen
+            rule class == 'Firefox': fullscreen
+            rule class == 'Vivaldi-stable': fullscreen, tag = 2
+      ..]]
   .'
 
    define '[..
       cmd define dmenu = [common/utils/dmenu default]
-      cmd define ghostty = '"ghostty"'
-      cmd define xfce4_terminal = '"xfce4-terminal"'
-
+      cmd define main_term = '"kitty"'
+      cmd define secondary_term = '"xfce4-terminal"'
+|
       cmd define xkill = '"xkill"'
-
+|
       cmd define reset_monitors = '"xrandr", "--auto"'
       cmd define connect_monitor = '"connect_monitor_x11"'
       cmd define tty_next = '"switch-tty"'
       cmd define tty_prev = '"switch-tty", "-rev"'
       cmd define i3lock = '"i3lock", "-c", "000000"'
-
+|
       cmd define brightness_up = [common/utils/brightness up 5]
       cmd define brightness_down = [common/utils/brightness down 5]
-
+|
       cmd define audio_up = [common/utils/audio up 5]
       cmd define audio_down = [common/utils/audio down 5]
       cmd define audio_mute = [common/utils/audio mute 'toggle']
    ..]'
 
-   keys mod = [super] '..
-      /* modifier     key        function        argument */
+   keys '..
       [..
          bind: alt space -> [cmd run dmenu]
-         bind: alt return -> [cmd run ghostty]
-         bind: super return -> [cmd run xfce4_terminal]
+         bind: alt return -> [cmd run main_term]
+         bind: super return -> [cmd run secondary_term]
          bind: alt right -> [cmd run tty_next]
          bind: alt left -> [cmd run tty_prev]
 
+         bind: ralt n -> [window prev]
+         bind: ralt o -> [window next]
          bind: alt n -> [window prev]
+         bind: alt o -> [window next]
+         bind: alt h -> [window prev]
          bind: alt i -> [window next]
-         |bind: alt e -> [window prev]
-         |bind: alt o -> [window next]
 
          bind: alt c -> [dwm killclient]
 
@@ -123,6 +99,7 @@ focusstack, {.i = [
          bind: super r -> [dwm setmfact 'f = -0.05']
          bind: super s -> [dwm setmfact 'f = +0.05']
          bind: super t -> [setlayout tiled]
+         bind: ralt t -> [setlayout tiled]
          bind: super f -> [setlayout floating]
          bind: super m -> [setlayout monocle]
          bind: super comma -> [dwm focusmon 'i = -1']
@@ -136,27 +113,26 @@ focusstack, {.i = [
          bind: XF86XK_AudioMute -> [cmd run audio_mute]
 
          bind: alt tab -> [dwm view]
+         bind: super shift q -> [dwm quit]
+         bind: super q -> [dwm setlayout]
+         bind: super shift space -> [dwm togglefloating]
 
          tag a 1
          tag r 2
          tag s 3
          tag t 4
-
+|
          tag q 5
          tag w 6
          tag f 7
          tag p 8
          tag g 9
       ..]
-      {MODKEY,        XK_q,      setlayout,      {0}               },
-      {MODKEY | ShiftMask, XK_space,  togglefloating, {0}               },
-      {MODKEY,        XK_0,      view,           {.ui = ~0}        },
-      {MODKEY | ShiftMask, XK_0, tag,            {.ui = ~0}        },
-      {MODKEY | ShiftMask, XK_comma,  tagmon,    {.i = -1}         },
-      {MODKEY | ShiftMask, XK_period, tagmon,    {.i = +1}         },
-      TAGKEYS(XK_1, 0) TAGKEYS(XK_2, 1) TAGKEYS(XK_3, 2) TAGKEYS(XK_4, 3)
-         TAGKEYS(XK_5, 4) TAGKEYS(XK_6, 5) TAGKEYS(XK_7, 6) TAGKEYS(XK_8, 7)
-            TAGKEYS(XK_9, 8){MODKEY | ShiftMask, XK_q,      quit,           {0}               },
+
+      {[super],           XK_0,      view,      {.ui = ~0} },
+      {[super] | [shift], XK_0,      tag,       {.ui = ~0} },
+      {[super] | [shift], XK_comma,  tagmon,    {.i  = -1} },
+      {[super] | [shift], XK_period, tagmon,    {.i  = +1 } },
    ..'
 ]
 

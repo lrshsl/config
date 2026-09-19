@@ -1,8 +1,8 @@
 
 map brightness [action:ident] [val] => '..\
    "brightnessctl", "s", "[is action {
-      'up' ? '+[val]%',
-      'down' ? '[val]%-',
+      'up' ? '+[__stringify val]%',
+      'down' ? '[__stringify val]%-',
    }]"
 ..'
 
@@ -25,7 +25,7 @@ map audio [action:ident] [val] => '..\
    "@DEFAULT_SINK@",
    "[is action {
       'mute' ? 'toggle',
-      'up' ? '[val]%+',
-      'down' ? '[val]%-',
+      'up' ? '[__stringify val]%+',
+      'down' ? '[__stringify val]%-',
    }]"
 ..'

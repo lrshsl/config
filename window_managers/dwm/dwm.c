@@ -193,6 +193,7 @@ void applyrules(Client *c) {
 	c->isfloating = 0;
 	c->isfullscreen = 0;
 	c->tags = 0;
+	c->bw = 0;
 	XGetClassHint(dpy, c->win, &ch);
 	class = ch.res_class ? ch.res_class : broken;
 	instance = ch.res_name ? ch.res_name : broken;
@@ -918,9 +919,9 @@ void grabkeys(void) {
 	updatenumlockmask();
 	{
 		unsigned int i, j, k;
-		unsigned int modifiers[] = {
-			0, LockMask, numlockmask, numlockmask | LockMask
-		};
+		unsigned int modifiers[] = {0,           LockMask,
+		                            numlockmask, numlockmask | LockMask,
+		                            Mod2Mask,    Mod2Mask | LockMask};
 		int start, end, skip;
 		KeySym *syms;
 
@@ -1058,9 +1059,9 @@ void manage(Window w, XWindowAttributes *wa) {
 	}
 	c->mon->sel = c;
 	arrange(c->mon);
-   if ( c->isfullscreen ) {
-      setfullscreen(c, 1);
-   }
+	if ( c->isfullscreen ) {
+		setfullscreen(c, 1);
+	}
 	XMapWindow(dpy, c->win);
 	focus(NULL);
 }
@@ -1493,8 +1494,8 @@ void setfocus(Client *c) {
 }
 
 void togglefullscreen(const Arg *arg) {
-   Client *c = selmon->sel;
-   setfullscreen(c, !c->isfullscreen);
+	Client *c = selmon->sel;
+	setfullscreen(c, !c->isfullscreen);
 }
 
 void setfullscreen(Client *c, int fullscreen) {
@@ -1697,6 +1698,7 @@ void spawn(const Arg *arg) {
 		sa.sa_handler = SIG_DFL;
 		sigaction(SIGCHLD, &sa, NULL);
 
+		// Spawn the command in the child process
 		execvp(((char **)arg->v)[0], (char **)arg->v);
 		die("dwm: execvp '%s' failed:", ((char **)arg->v)[0]);
 	}
@@ -1727,13 +1729,30 @@ void tile(Monitor *m) {
 		return;
 	}
 
+	if ( n == 1 ) {
+		// Single window: Fullscreen
+		c = nexttiled(m->clients);
+		c->oldbw = c->bw;
+		c->bw = 0;
+		c->wasautoborderless = 1;
+		resize(c, m->wx, m->wy, m->ww, m->wh, 0);
+		return;
+	}
+
 	if ( n > m->nmaster ) {
 		mw = m->nmaster ? m->ww * m->mfact : 0;
 	} else {
 		mw = m->ww;
 	}
+
 	for ( i = my = ty = 0, c = nexttiled(m->clients); c;
 	      c = nexttiled(c->next), i++ ) {
+
+		if ( c->wasautoborderless ) {
+			// doesn't work
+			c->wasautoborderless = 0;
+			c->bw = c->oldbw;
+		}
 		if ( i < m->nmaster ) {
 			h = (m->wh - my) / (MIN(n, m->nmaster) - i);
 			resize(c, m->wx, m->wy + my, mw - (2 * c->bw), h - (2 * c->bw), 0);
