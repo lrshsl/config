@@ -1,28 +1,29 @@
 import ./broot/*
 
 [..
-   'default_flags = "gh"'
-   'cols_order = \[
-      "mark",
-      "git",
-      "branch",
-      "permission",
-      "date",
-      "size",
-      "count",
-      "name",
-   \]'
-
    [action(text_file)
       edit / e -> sh "nvim +{line} {file}"]
 
    [action(text_file)
-      git_diff_inline / gdi -> sh 'git diff --color-words {file}']
+      git_diff_inline / gdi -> sh '!git diff --color-words {file}']
+   [action(text_file)
+      gdip / p -> run ':!gdi']
 
    [action(text_file)
-      git_diff / gd -> sh 'git difftool -y {file}']
+      git_diff_tool / gdt -> sh 'git difftool -y {file}']
 
    [action() file_info / fi -> cmd_list ':perm;:dates;:sizes'] | (git) perm date size
+
+   '..
+\[\[verbs\]\]
+invocation = "git_diff"
+shortcut = "gd"
+apply_to = "file"
+external = \["git", "-C", "{git-root}", "diff", "--", "{file-git-relative}"\]
+working_dir = "{git-root}"
+leave_broot = false
+impacted_panel = "preview"
+..'
 
    | Shortcuts
    bind 'ctrl-p' -> builtin 'toggle_preview'
@@ -31,8 +32,8 @@ import ./broot/*
    |bind 'ctrl-d' -> mkpanel 'git_diff_inline'
 
    | Multi panel
-   bind 'ctrl-o' -> builtin 'panel_right'
-   bind 'ctrl-n' -> builtin 'panel_left_no_open'
+   bind 'ctrl-i' -> builtin 'panel_right'
+   bind 'ctrl-h' -> builtin 'panel_left_no_open'
 
    bind 'ctrl-shift-i' -> sh 'cp -r {file} {other-panel-directory}'
    bind 'ctrl-shift-h' -> sh 'cp -r {file} {other-panel-directory}'

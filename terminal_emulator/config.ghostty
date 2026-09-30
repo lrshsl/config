@@ -30,6 +30,8 @@ keybind = ctrl+shift+h=text:\x01man \x0d
 
 # <Meta-'> => echo '[[cmd]]'
 keybind = alt+'=text:'\x01echo '\x05
+keybind = ctrl+'=text:\x01copy_cmd_and_out \x05
+keybind = ctrl+shift+f1=copy_to_clipboard
 
 # <Ctrl-Shift-L> => copy (unfinished) command to system clipboard
 keybind = ctrl+shift+l=text:'|copy\x01echo -n '\x0d

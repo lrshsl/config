@@ -2,7 +2,7 @@ map action([filter:ident?])
    [long:ident] / [short:ident] [args:ident*] -> [action:ident] [cmd]
 => '..
 \[\[verbs\]\]
-invocation = "[long] [mkarg [*args]]"
+invocation = "[long][mkarg [*args]]"
 [shortcut short]
 [translate action [action]] = "[cmd]"
 leave_broot = false
@@ -20,6 +20,7 @@ action([filter])
 map translate action [action:ident] => [is action {
    'sh' ? 'external',
    'run' ? 'internal',
+   'mkpanel' ? 'external',
    'cmd_list' ? 'cmd',
 }]
 
@@ -31,8 +32,8 @@ map mkflag [x] => [is x {
    'date' ? 'd',
 }]
 
-map mkarg [arg:ident] [args:ident+] => '[mkarg [arg]] [mkarg [*args]]'
-map mkarg [arg:ident] => '{[arg]}'
+map mkarg [arg:ident] [args:ident+] => ' [mkarg [arg]][mkarg [*args]]'
+map mkarg [arg:ident] => ' {[arg]}'
 map mkarg => ''
 
 map shortcut => ''

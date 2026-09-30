@@ -163,6 +163,10 @@ abbr l5           lstree 5
 
 alias copy="xclip -selection clipboard"
 
+function pager
+   set -q PAGER; or set -l PAGER less
+   eval $history[1] | $PAGER
+end
 
 
 #-- Functions --#

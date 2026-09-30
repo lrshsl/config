@@ -44,6 +44,7 @@ focusstack, {.i = [
       [[..
             rule class == 'Gimp': float
             rule class == 'Ghostty': fullscreen
+            rule class == 'kitty': fullscreen
             rule class == 'Firefox': fullscreen
             rule class == 'Vivaldi-stable': fullscreen, tag = 2
       ..]]
@@ -55,6 +56,7 @@ focusstack, {.i = [
       cmd define secondary_term = '"xfce4-terminal"'
 |
       cmd define xkill = '"xkill"'
+      cmd define visual = '"neovide"'
 |
       cmd define reset_monitors = '"xrandr", "--auto"'
       cmd define connect_monitor = '"connect_monitor_x11"'
@@ -80,20 +82,17 @@ focusstack, {.i = [
 
          bind: ralt n -> [window prev]
          bind: ralt o -> [window next]
-         bind: alt n -> [window prev]
-         bind: alt o -> [window next]
-         bind: alt h -> [window prev]
-         bind: alt i -> [window next]
 
-         bind: alt c -> [dwm killclient]
+         bind: ralt c -> [dwm killclient]
+
+         bind: ralt equal -> [dwm zoom]
+         bind: ralt m -> [dwm togglefullscreen]
 
          bind: super b -> [dwm togglebar]
-         bind: alt equal -> [dwm zoom]
-
-         bind: alt m -> [dwm togglefullscreen]
          bind: super w -> [cmd run reset_monitors]
          bind: super c -> [cmd run connect_monitor]
          bind: super z -> [cmd run i3lock]
+         |bind: super n -> [cmd run visual]
          bind: super esc -> [cmd run xkill]
 
          bind: super r -> [dwm setmfact 'f = -0.05']

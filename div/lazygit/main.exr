@@ -7,7 +7,7 @@ git:
 keybinding:
    universal:
       prevItem: \[<up>, <ctrl+e>\]
-      nextItem: \[<up>, <ctrl+n>\]
+      nextItem: \[<down>, <ctrl+n>\]
       scrollLeft: H
       scrollRight: I
       togglePanel: <tab>
